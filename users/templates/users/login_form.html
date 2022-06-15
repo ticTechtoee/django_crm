@@ -6,22 +6,22 @@
 <head>
   {% load static %}
   <meta charset="UTF-8">
-  <title>Admin Login Form</title>
-  <link href="{% static 'CSS/style.css' %}" rel="stylesheet" type="text/css">
-  <link rel='icon' href="{% static '/Images/face-attendance-icon.png' %}">
+  <title>User Login Form</title>
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
+  <link rel='icon' href="{% static '/images/face-attendance-icon.png' %}">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 </head>
 
 <body>
-  <img class="wave" src={% static 'Images/login_form_wave.png' %}>
+  <img class="wave" src={% static 'images/login_form_wave.png' %}>
   <div class="container">
     <div class="img">
-      <img src={% static 'Images/login_side_image.png' %}>
+      <img src={% static 'images/login_side_image.png' %}>
     </div>
     <div class="login-box-content">
       <form action="" method="post">
         {% csrf_token %}
-        <img src={% static 'Images/login_profile_icon.svg' %}>
+        <img src={% static 'images/login_profile_icon.svg' %}>
         <h3 class="title">LOGIN HERE</h3>
 
         <div class="input-div one">
