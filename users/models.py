@@ -1,9 +1,61 @@
+import uuid
 from django.db import models
 
-class BasicData(models.Model):
-    name = models.CharField(max_length=40)
-    password = models.CharField(max_length=10)
+class clients(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    name = models.CharField(max_length=50)
+    address = models.CharField(max_length=100)
+    post_code = models.CharField(max_length=6)
+    tel_number = models.CharField(max_length=10)
     email = models.EmailField()
-    contact_number = models.CharField(max_length=10)
-    def __str__(self):
-        return self.name
+    date_added = models.DateField()
+    status = models.ForeignKey('status', on_delete = models.CASCADE)
+    preferred_day = models.DateField()
+    type = models.CharField(max_length=5)
+    frequency = models.CharField(max_length=10)
+    number_of_hours = models.IntegerField()
+    paying = models.CharField(max_length=1)
+    paying_methos = models.CharField(max_length=5)
+    cleaner_allocated = models.CharField(max_length=20)
+    ex_cleaners = models.CharField(max_length=20)
+    payment_reference = models.CharField(max_length=40)
+    email_to_client = models.CharField(max_length=1)
+    sms_to_client = models.CharField(max_length=1)
+
+class status(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    notes = models.CharField(max_length=50)
+
+class cleaners(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    name = models.CharField(max_length=50)
+    address = models.CharField(max_length=100)
+    post_code = models.CharField(max_length=6)
+    tel_number = models.CharField(max_length=10)
+    email = models.EmailField()
+    date_added = models.DateField()
+    status = models.ForeignKey(status, on_delete = models.CASCADE)
+    number_of_hours_wanted = models.IntegerField()
+    nationality = models.CharField(max_length=20)
+    permit_to_work_needed = models.CharField(max_length=1)
+    emergency_contact_number = models.CharField(max_length=10)
+    DBS = models.CharField(max_length=20)
+    NI_Nunber = models.CharField(max_length=30)
+    emergency_contact_name = models.CharField(max_length=10)
+    relationship_to_emergency_contact = models.CharField(max_length=10)
+    consent_for_DBS = models.CharField(max_length=10)
+    #picture
+    smoker = models.CharField(max_length=1)
+    can_iron = models.CharField(max_length=1)
+    driver = models.CharField(max_length=1)
+    has_car = models.CharField(max_length=1)
+    #id_proof
+    referee_1_details = models.CharField(max_length=50)
+    referee_2_details = models.CharField(max_length=50)
+    areas_worked = models.CharField(max_length=50)
+    prev_work_experience = models.CharField(max_length=1)
+    prev_convicted_of_offence = models.CharField(max_length=1)
+    pet_allergies = models.CharField(max_length=1)
+    transactions_date = models.DateField()
+    email_client = models.CharField(max_length=20)
+    SMS_cleaner = models.CharField(max_length=20)
