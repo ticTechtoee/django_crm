@@ -10,9 +10,11 @@ urlpatterns = [
     path('create_staff/',views.create_staff, name='create_staff'),
 
     path('login_form/', views.loginUser, name='login_form'),
+    path('logout/', views.logout_user, name='logut_user'),
+    
 
-    path('create_clients/', views.create_clients, name='create_clients'),
-    path('create_cleaners/', views.create_cleaners, name='create_cleaners'),
+    # path('create_clients/', views.create_clients, name='create_clients'),
+    # path('create_cleaners/', views.create_cleaners, name='create_cleaners'),
     
 
 ]

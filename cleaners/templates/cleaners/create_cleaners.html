@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        {{form.name.label}}
+                        {{form.name}}
+                    </div>
+                    <div class="col-sm-6">
+                        {{form.landline_number.label}}
+                        {{form.landline_number}}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        {{form.mobile_number.label}}
+                        {{form.mobile_number}}
+                    </div>
+                    <div class="col-sm-6">
+                        {{form.address_line1.label}}
+                        {{form.address_line1}}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        {{form.address_line2.label}}
+                        {{form.address_line2}}
+                    </div>
+                    <div class="col-sm-6">
+                        {{form.address_line3.label}}
+                        {{form.address_line3}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        {{form.post_code.label}}
+                        {{form.post_code}}
+                        
+                    </div>
+                    <div class="col-sm-6">
+                        {{form.email.label}}
+                        {{form.email}}
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        {{form.date_added.label}}
+                        {{form.date_added}}
+                    </div>
+                    <div class="col-sm-6">
+                        {{form.status.label}}
+                        {{form.status}}
+                        <a href="{% url 'cleaners:create_status' %}">Add A New Status</a>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        {{form.number_of_hours_wanted.label}}
+                        {{form.number_of_hours_wanted}}
+                    </div>
+                    <div class="col-sm-6">
+                        {{form.nationality.label}}
+                        {{form.nationality}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        {{form.permit_to_work_needed.label}}
+                        {{form.permit_to_work_needed}}
+                    </div>
+                    <div class="col-sm-6">
+                        {{form.emergency_contact_name.label}}
+                        {{form.emergency_contact_name}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        {{form.emergency_contact_number.label}}
+                        {{form.emergency_contact_number}}
+                    </div>
+                    <div class="col-sm-6">
+                        {{form.relationship_to_emergency_contact.label}}
+                        {{form.relationship_to_emergency_contact}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        {{form.Disclouser.label}}
+                        {{form.Disclouser}}
+                    </div>
+                    <div class="col-sm-6">
+                        {{form.NI_Nunber.label}}
+                        {{form.NI_Nunber}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        {{form.consent_for_DBS.label}}
+                        {{form.consent_for_DBS}}
+                    </div>
+                    <div class="col-sm-6">
+                        {{form.smoker.label}}
+                        {{form.smoker}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        {{form.can_iron.label}}
+                        {{form.can_iron}}
+                    </div>
+                    <div class="col-sm-6">
+                        {{form.driver.label}}
+                        {{form.driver}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        {{form.has_car.label}}
+                        {{form.has_car}}
+                    </div>
+                    <div class="col-sm-6">
+                        {{form.areas_worked.label}}
+                        {{form.areas_worked}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        {{form.referee_1_details.label}}
+                        {{form.referee_1_details}}
+                    </div>
+                    <div class="col-sm-6">
+                        {{form.referee_2_details.label}}
+                        {{form.referee_2_details}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        {{form.prev_work_experience.label}}
+                        {{form.prev_work_experience}}
+                    </div>
+                    <div class="col-sm-6">
+                        {{form.prev_convicted_of_offence.label}}
+                        {{form.prev_convicted_of_offence}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                          
+                        {{form.pet_allergies.label}}
+                        {{form.pet_allergies}}
+                    </div>
+                    <div class="col-sm-6">
+                        {{form.type_of_allergy.label}}
+                        {{form.type_of_allergy}}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        {{form.transactions_date.label}}
+                        {{form.transactions_date}}
+                    </div>
+
+                </div>
+
+                <button name="btnsave" type="submit" class="btn btn-success px-4 float-right">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
