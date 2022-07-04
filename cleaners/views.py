@@ -1,3 +1,4 @@
+from http.client import HTTPResponse
 from urllib import request
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
@@ -17,10 +18,10 @@ def create_cleaners(request):
             
             if form.is_valid():
                 form.save()
-                
+                return HTTPResponse('Cleaner Profile has been done.')
             else:
                 print(form.errors)
-    context = {'form':form}
+    context = {'form':form, 'title':title_of_page}
     return render(request, 'cleaners/create_cleaners.html', context)
 
 @login_required(login_url='/login_form/')
@@ -33,13 +34,4 @@ def create_status(request):
             return redirect('cleaners:create_cleaners')
     context = {'form': form}
     return render(request, 'cleaners/create_status.html', context)
-
-
-def logout(request):
-    if 'btnlogout' in request.POST:
-        logout(request)
-        return redirect('users:login_form')
-    return redirect('cleaners:create_cleaners')
-
-
 

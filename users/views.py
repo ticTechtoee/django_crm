@@ -42,24 +42,3 @@ def logout_user(request):
     logout(request)
     return redirect('users:login_form')
 
-
-# def create_clients(request):
-#     form = clientsForm()
-#     if request.method == 'POST':
-#         form = clientsForm()
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponse('Cleaner Profile has been created')
-#     context = {'form':form}
-#     return render(request, 'users/create_clients.html', context)
-
-
-# def create_cleaners(request):
-#     form = cleanersForm()
-#     if request.method == 'POST':
-#         form = cleanersForm()
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponse('Cleaner Profile has been created')
-#     context = {'form':form}
-#     return render(request, 'users/create_cleaners.html', context)

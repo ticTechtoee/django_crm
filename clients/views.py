@@ -13,8 +13,10 @@ def create_clients(request):
         form = clientsForm(request.POST)
         if form.is_valid():
             form.save()
-            print('Profile is Done')
-    context = {'form':form}
+            return HttpResponse('The Clients Profile Has been done.')
+        else:
+            print(form.errors)
+    context = {'form':form, 'title':title_of_page}
     return render(request, 'clients/create_clients.html', context)
     
 @login_required(login_url='/login_form/')
@@ -37,6 +39,8 @@ def create_status(request):
         if form.is_valid():
             form.save()
             return redirect('clients:create_clients')
+        else:
+            print(form.errors)
     context = {'form': form}
     return render(request, 'clients/create_status.html', context)
 
