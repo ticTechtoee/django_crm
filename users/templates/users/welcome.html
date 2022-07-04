@@ -16,11 +16,23 @@
         <p class="description">
             We will connect you with best service in the Area.
         </p>
-        
-
+        {% if request.user.is_authenticated  %}
+            {% if request.user.is_superuser %}
+            <a href="{% url 'users:create_staff' %}"><button class="wel-button">
+                    <i class="fas fa-sign-in"></i>Login Here
+                </button></a>
+            {% else %}
+            
+            <a href="{% url 'clients:create_clients' %}"><button class="wel-button">
+                    <i class="fas fa-sign-in"></i>Login Here
+                </button></a>
+            {% endif %}
+        {% else %}
         <a href="{% url 'users:login_form' %}"><button class="wel-button">
-        <i class="fas fa-sign-in"></i>Login Here
-        </button></a>
+                <i class="fas fa-sign-in"></i>Login Here
+            </button></a>
+        {% endif %}
+        
         </div>
         <div class="main-img">
         <img class="wel-img" src={% static 'images/welcome_icon.png' %} alt="welcome">
