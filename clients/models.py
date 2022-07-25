@@ -37,6 +37,7 @@ TYPES_PAYING_METHODS = [
 
 class clients(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+
     #Mr, Ms, Mrs
     #One Field is Fine
     name = models.CharField(max_length=50)
@@ -47,7 +48,9 @@ class clients(models.Model):
     address_line_3 = models.CharField(max_length=30)
     
     zip_code = models.ForeignKey('zipCode', on_delete=models.CASCADE)
-       
+
+    profile_image = models.ImageField(upload_to='images/profile_images/', null=True, blank=True)
+
     # 11 digits in the number
 #    1 mobile and 1 landline.
 
@@ -60,8 +63,11 @@ class clients(models.Model):
     date_added = models.DateTimeField()
 
     #Notes in a text form
+    
     # tba to be allocated, int interviewing cleaner, ncp cleaner accepted, dc dead client
     status = models.ForeignKey('status', on_delete = models.CASCADE)
+
+    #Notes fields is missing, date stamp and description
     
     # Any day of week
     # Text field
@@ -92,10 +98,12 @@ class clients(models.Model):
     payment_reference = models.CharField(max_length=40)
     
     #Email address, make history of each converstation or letters
+    
     #email_to_client = models.EmailField()
     
-    #
+    
     #sms_to_client = models.CharField(max_length=1)
+
     def __str__(self):
         return self.name
         
@@ -115,3 +123,14 @@ class status(models.Model):
     full_form = models.CharField(max_length=30, default='to be allocated')
     def __str__(self):
         return self.abber_of_notes
+
+FORMAT_EMAIL_TEMPLATES = [
+    ('TEMP 1','Template 1'),
+    ('TEMP 2','Template 2')
+]
+
+class email_templates(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    template_name = models.CharField(max_length=50, choices=FORMAT_EMAIL_TEMPLATES)
+    def __str__(self):
+        return self.template_name

@@ -18,7 +18,7 @@ class cleaners(models.Model):
     address_line1 = models.CharField(max_length=30)
     address_line2 = models.CharField(max_length=30)
     address_line3 = models.CharField(max_length=30)
-    post_code = models.CharField(max_length=6)
+    zip_code = models.CharField(max_length=6)
 
     landline_number = models.CharField(max_length=11)
     mobile_number = models.CharField(max_length=11)
@@ -90,7 +90,10 @@ class cleaners(models.Model):
 
     #Same as clients
     #email_client = models.CharField(max_length=20)
+    
     #SMS_cleaner = models.CharField(max_length=20)
+    def __str__(self):
+        return self.name
 
 #Notes in a text form
 # tba to be allocated, int interviewing cleaner, ncp cleaner accepted, dc dead client

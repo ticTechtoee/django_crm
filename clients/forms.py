@@ -1,7 +1,8 @@
+from pyexpat import model
 from django.forms import ModelForm
 from django import forms
 
-from .models import clients, zipCode, status
+from .models import clients, zipCode, status, email_templates
 
 
 
@@ -41,3 +42,10 @@ class statusForm(ModelForm):
     class Meta:
         model = status
         fields = '__all__'
+
+class email_templateForm(ModelForm):
+    
+    class Meta:
+        model = email_templates
+        fields = '__all__'
+        

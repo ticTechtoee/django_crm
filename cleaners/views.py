@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render, redirect
 
+from cleaners.models import cleaners
+
 
 from .forms import cleanersForm,statusForm
 
@@ -18,7 +20,7 @@ def create_cleaners(request):
             
             if form.is_valid():
                 form.save()
-                return HTTPResponse('Cleaner Profile has been done.')
+                return redirect('cleaners:dashboard')
             else:
                 print(form.errors)
     context = {'form':form, 'title':title_of_page}
@@ -35,3 +37,8 @@ def create_status(request):
     context = {'form': form}
     return render(request, 'cleaners/create_status.html', context)
 
+@login_required(login_url='/login_form/')
+def cleaners_dashboard(request):
+    get_cleaner = cleaners.objects.all()
+    context = {'cleaner_info': get_cleaner}
+    return render(request, 'cleaners/dashboard.html', context)

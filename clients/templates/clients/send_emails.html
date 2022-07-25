@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="dropdown">
+  <form action="" method="post">
+    {% csrf_token %}
+    {{form}} {{clients_data.email}}   
+  <input type="submit" value="Select">
+  </form>
+</div>
+  {% endblock content %}

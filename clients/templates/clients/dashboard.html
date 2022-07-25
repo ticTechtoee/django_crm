@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+<div class="container py-5">
+  <form action="" method="post">
+    {% csrf_token %}
+    <div class="col-sm-12">
+  <input name="search" type="text" class="form-control" placeholder="Search"><button name="srchByName" type="submit" class="btn btn-primary">Search By Name</button>
+  <button name="srchByEmail" type="submit" class="btn btn-primary">Search By Email</button>
+  <button name="srchByZip" type="submit" class="btn btn-primary">Search By Zip Code</button>
+  <button name="srchByPD" type="submit" class="btn btn-primary">Search By Preferred Day</button>
+  <button name="srchByType" type="submit" class="btn btn-primary">Search By Type</button></div>
+  </form>  
+  <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Client's Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Zip Code</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for data in client_info %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ data.name }}</td>
+            <td><a href="{% url 'clients:get_email_template' data.id %}">{{ data.email }}</a></td>
+            <td>{{ data.zip_code }}</td>
+            <td><p><a href="{% url 'clients:show_client' data.id %}">View</a>  <a href="#">Print</a></p></td>
+          </tr>
+         {% endfor %}
+        </tbody>
+      </table>
+      
+</div>
+{% endblock content %}
