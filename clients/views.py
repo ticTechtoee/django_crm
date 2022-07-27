@@ -7,9 +7,11 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 
-from clients.models import clients, email_templates
+from xhtml2pdf import pisa
 
-from .forms import clientsForm,zipCodeForm, statusForm, email_templateForm
+from clients.models import clients
+
+from .forms import clientsForm,zipCodeForm, statusForm, email_templateForm, sent_emailForm
 
 
 
@@ -90,21 +92,66 @@ def send_emails(template_name, clients_email):
 
 def get_email_template(request,pk):
     form = email_templateForm()
+    formSE = sent_emailForm()
+
     get_the_data = clients.objects.get(id=pk)
     if request.method == 'POST':
-        select_value = request.POST.get('template_name')
-        if select_value == 'TEMP 1':
-            ans_frm_func =  send_emails(select_value, get_the_data.email)
-            print(ans_frm_func)
-        elif select_value == 'TEMP 2':
-            send_emails(select_value,get_the_data.email)
-    context = {'form': form, 'clients_data':get_the_data}
+        if 'send_email' in request.POST:
+            formSE = sent_emailForm(request.POST)
+            if formSE.is_valid():
+                formSE.save()
+                starting_string = "<!DOCTYPE html><html lang='en'><head></head><body>"
+                ending_string = "</body></html>"
+                #Custom Email 
+                subject = formSE.cleaned_data.get('email_subject')
+                email_body = formSE.cleaned_data.get('email_body')
+                from_email = settings.EMAIL_HOST_USER
+                to_email = (get_the_data.email,'')
+                message = EmailMultiAlternatives(subject=subject, body=starting_string+email_body+ending_string, from_email=from_email, to=to_email)
+                
+                message.send()
+                return HttpResponse('Email Sent')
+
+            else:
+                print(form.errors)
+        elif 'send_email_temp' in request.POST:
+            select_value = request.POST.get('template_name')
+            if select_value == 'TEMP 1':
+                ans_frm_func =  send_emails(select_value, get_the_data.email)
+                print(ans_frm_func)
+            elif select_value == 'TEMP 2':
+                send_emails(select_value,get_the_data.email)
+    
+    context = {'form': form, 'formSE':formSE, 'clients_data':get_the_data}
     return render(request, 'clients/send_emails.html', context)
 
 def show_client(request, pk):
     get_the_data = clients.objects.get(id=pk)
     context = {'client_detail':get_the_data}
     return render(request, 'clients/show_client.html', context)
+
+def create_pdf(request,pk):
+    c_info = clients.objects.get(id=pk)
+
+    template_path = 'clients/create_report/export_pdf.html'
+
+    context = {'client_detail': c_info}
+
+    response = HttpResponse(content_type='application/pdf')
+
+    response['Content-Disposition'] = 'filename="client_profile.pdf"'
+
+    template = get_template(template_path)
+
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+       html, dest=response)
+    # if error then show some funy view
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
 
 
 

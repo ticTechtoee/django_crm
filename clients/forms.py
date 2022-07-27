@@ -2,7 +2,7 @@ from pyexpat import model
 from django.forms import ModelForm
 from django import forms
 
-from .models import clients, zipCode, status, email_templates
+from .models import clients, zipCode, status, email_templates, sent_emails
 
 
 
@@ -48,4 +48,14 @@ class email_templateForm(ModelForm):
     class Meta:
         model = email_templates
         fields = '__all__'
-        
+
+class sent_emailForm(ModelForm):
+    
+    class Meta:
+        model = sent_emails
+        fields = '__all__'
+    def __init__(self, *args, **kwargs):
+        super(sent_emailForm, self).__init__(*args, **kwargs)
+       
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class':'form-control'})

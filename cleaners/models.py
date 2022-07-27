@@ -23,6 +23,9 @@ class cleaners(models.Model):
     landline_number = models.CharField(max_length=11)
     mobile_number = models.CharField(max_length=11)
 
+
+
+
     email = models.EmailField()
     
     date_added = models.DateField()
@@ -87,6 +90,9 @@ class cleaners(models.Model):
     #if yes then put the, amount, date of transaction
 
     transactions_date = models.DateField()
+
+    valid_cleaner = models.CharField(max_length=3, blank=True , choices=QUESTION)
+
 
     #Same as clients
     #email_client = models.CharField(max_length=20)

@@ -102,7 +102,7 @@
                 </div>
                 
 
-                <button name="btnsave" class="btn btn-success px-4 float-right">Print</button>
+                <a href="{% url 'clients:create_pdf' client_detail.id %}" class="btn btn-success px-4 float-right">Print</a>
             </form>
         </div>
     </div>

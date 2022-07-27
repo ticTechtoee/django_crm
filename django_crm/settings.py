@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'clients.apps.ClientsConfig',
-    'cleaners.apps.CleanersConfig'
+    'cleaners.apps.CleanersConfig',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [

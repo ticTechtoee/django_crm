@@ -1,5 +1,8 @@
+from queue import Empty
 import uuid
 from django.db import models
+from cleaners.models import cleaners
+from ckeditor.fields import RichTextField
 
 NAME_OF_DAY=[('MON', 'Monday'),
 ('TUE', 'Tuesday'),
@@ -89,17 +92,17 @@ class clients(models.Model):
     paying_methods = models.CharField(max_length=13, choices=TYPES_PAYING_METHODS)
     
     # Every cleaner that is available in the postcode, existing cleaner status, available for work
-    #cleaner_allocated = models.CharField(max_length=20)
+    cleaner_allocated = models.ForeignKey(cleaners, on_delete=models.PROTECT)
     
     # An ex-cleaner, 
-    #ex_cleaners = models.CharField(max_length=20)
+    ex_cleaners = models.CharField(max_length=20)
     
     #Surname of the client, reference to see the payments, text field
     payment_reference = models.CharField(max_length=40)
     
     #Email address, make history of each converstation or letters
     
-    #email_to_client = models.EmailField()
+    email_to_client = models.ForeignKey('sent_emails', on_delete=models.PROTECT)
     
     
     #sms_to_client = models.CharField(max_length=1)
@@ -134,3 +137,10 @@ class email_templates(models.Model):
     template_name = models.CharField(max_length=50, choices=FORMAT_EMAIL_TEMPLATES)
     def __str__(self):
         return self.template_name
+
+class sent_emails(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    email_subject = models.CharField(max_length=50)
+    email_body = RichTextField(blank = True, null=True)
+    def __str__(self):
+        return self.email_subject

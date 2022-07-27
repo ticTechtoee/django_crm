@@ -26,6 +26,7 @@
             <th scope="col">Cleaner's Name</th>
             <th scope="col">Email</th>
             <th scope="col">Zip Code</th>
+            <th scope="col">Status</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -36,6 +37,25 @@
             <td>{{ data.name }}</td>
             <td>{{ data.email }}</td>
             <td>{{ data.zip_code }}</td>
+            {% if data.valid_cleaner == '1' %}
+            <td>
+              
+              <p>Verified</p>
+
+            </td>
+            {% elif data.valid_cleaner == '2' %}
+            <td>
+              
+              <p>Declined</p>
+
+            </td>
+            {% else %}
+            <td>
+              
+              <p>Pending</p>
+
+            </td>
+            {% endif %}
             <td><p><a href="#">View</a> <a href="#">Print</a></p></td>
           </tr>
          {% endfor %}

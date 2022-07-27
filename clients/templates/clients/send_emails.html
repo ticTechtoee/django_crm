@@ -1,12 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-
-<div class="dropdown">
+<div class="container py-5">
+<div class="dropdown col-sm-6">
   <form action="" method="post">
     {% csrf_token %}
     {{form}} {{clients_data.email}}   
-  <input type="submit" value="Select">
+  <input name="send_email_temp" type="submit" value="Select">
   </form>
 </div>
+<h2>Or</h2>
+<div class="col-sm-6">
+  <form action="" method="post">
+    {% csrf_token %}
+    {{formSE.media}}
+    {{formSE}}
+    <input name="send_email" type="submit" value="Send">
+  </form>
+    </div>
+  </div>
   {% endblock content %}
+

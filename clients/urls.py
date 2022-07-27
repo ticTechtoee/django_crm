@@ -12,5 +12,6 @@ urlpatterns = [
     path('show_client/<str:pk>', views.show_client, name='show_client'),
     path('get_email_template/<str:pk>', views.get_email_template, name='get_email_template'),
     path('send_email', views.send_emails, name="send-email"),
+    path('create_pdf/<str:pk>', views.create_pdf, name='create_pdf'),
 
 ]
