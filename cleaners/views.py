@@ -14,6 +14,12 @@ from twilio.rest import Client
 
 from .forms import cleanersForm,statusForm,sent_emailForm, updateStatusForm
 
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
+
+
 @login_required(login_url='/login_form/')
 def create_cleaners(request):
     title_of_page = 'Create Cleaners'
@@ -107,10 +113,9 @@ def updateStatus(request, pk):
 
 
 def create_message(cleaners_name, staff_name, to_number):
-    # Find your Account SID and Auth Token at twilio.com/console
-    # and set the environment variables. See http://twil.io/secure
-    account_sid = 'AC3822a9e7572f87dcfcf773200c2371c3'
-    auth_token = 'b934797be6582ad4f783aaaee097eec4'
+    account_sid = env('account_sid')
+    auth_token = env('auth_token')
+    
     client = Client(account_sid, auth_token)
 
     message = client.messages.create(
