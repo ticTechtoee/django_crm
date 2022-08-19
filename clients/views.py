@@ -37,8 +37,12 @@ def create_clients(request):
             instance.zip_code = request.POST['zip_code']
             instance.cleaner_allocated = c_info
             instance.save()
-            create_message(request.POST['name'], request.user.get_username(), request.POST['mobile_number'])
-            return redirect('clients:dashboard')
+            try:
+                create_message(request.POST['name'], request.user.get_username(), request.POST['mobile_number'])
+            except:
+                print("cannot send the sms in clients")
+            finally:
+                return redirect('clients:dashboard')
         else:
                 print(form.errors)
     context = {'form':form, 'title':title_of_page}

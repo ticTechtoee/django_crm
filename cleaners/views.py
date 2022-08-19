@@ -24,8 +24,12 @@ def create_cleaners(request):
             
             if form.is_valid():
                 form.save()
-                create_message(request.POST['name'], request.user.get_username(), request.POST['mobile_number'])
-                return redirect('cleaners:dashboard')
+                try:
+                    create_message(request.POST['name'], request.user.get_username(), request.POST['mobile_number'])
+                except:
+                    print("Cannot send the sms in cleaners")
+                finally:
+                    return redirect('cleaners:dashboard')
             else:
                 print(form.errors)
         else:
