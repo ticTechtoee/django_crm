@@ -8,6 +8,29 @@ from django.contrib.auth.models import User
 from twilio.rest import Client
 from .forms import SignUpForm
 
+
+
+def create_message(staff_name, admin_name, to_number):
+    # Find your Account SID and Auth Token at twilio.com/console
+    # and set the environment variables. See http://twil.io/secure
+    account_sid = 'AC3822a9e7572f87dcfcf773200c2371c3'
+    auth_token = 'b934797be6582ad4f783aaaee097eec4'
+    client = Client(account_sid, auth_token)
+
+    message = client.messages.create(
+                                body = 
+                                'Hi, ' +staff_name+
+                                ' your profile has been created by '+admin_name+ ' at maid2clean',
+                                
+                                from_='+447862127546',
+                                to=to_number
+                            )
+
+    print(message.error_message)
+    return "success"
+
+
+
 def welcome(request):
     return render(request, 'users/welcome.html')
 
@@ -18,7 +41,7 @@ def create_staff(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            create_message(request.POST['first_name'] + request.POST['last_name'], request.user.get_username(), request.POST['contact_number'])
+            create_message(request.POST['first_name'], request.user.get_username(), request.POST['contact_number'])
             return redirect('users:dashboard')
             
     else:
@@ -55,21 +78,3 @@ def logout_user(request):
     logout(request)
     return redirect('users:login_form')
 
-def create_message(staff_name, admin_name, to_number):
-    # Find your Account SID and Auth Token at twilio.com/console
-    # and set the environment variables. See http://twil.io/secure
-    account_sid = 'AC3822a9e7572f87dcfcf773200c2371c3'
-    auth_token = 'e03f8b1617fa252c2d874839c6511c7f'
-    client = Client(account_sid, auth_token)
-
-    message = client.messages.create(
-                                body = 
-                                'Hi, ' +staff_name+
-                                ' your profile has been created by '+admin_name+ ' at maid2clean',
-                                
-                                from_='+447862127546',
-                                to=to_number
-                            )
-
-    print(message.error_message)
-    return "success"
