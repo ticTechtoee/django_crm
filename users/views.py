@@ -41,8 +41,12 @@ def create_staff(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            create_message(request.POST['first_name'], request.user.get_username(), request.POST['contact_number'])
-            return redirect('users:dashboard')
+            try:
+                create_message(request.POST['first_name'], request.user.get_username(), request.POST['contact_number'])
+            except:
+                print("cannot send the message in users")
+            finally:
+                return redirect('users:dashboard')
             
     else:
         form = SignUpForm()
