@@ -1,8 +1,10 @@
-from queue import Empty
+
 import uuid
 from django.db import models
 from cleaners.models import cleaners
 from ckeditor.fields import RichTextField
+
+
 
 NAME_OF_DAY=[('MON', 'Monday'),
 ('TUE', 'Tuesday'),
@@ -50,20 +52,20 @@ class clients(models.Model):
     address_line_2 = models.CharField(max_length=30)
     address_line_3 = models.CharField(max_length=30)
     
-    zip_code = models.ForeignKey('zipCode', on_delete=models.CASCADE)
+    zip_code = models.CharField(max_length=6)
 
-    profile_image = models.ImageField(upload_to='images/profile_images/', null=True, blank=True)
+    
 
     # 11 digits in the number
 #    1 mobile and 1 landline.
 
     landline_number = models.CharField(max_length=11, null=True, blank=True)
-    mobile_number = models.CharField(max_length=11, null=True, blank=True)
+    mobile_number = models.CharField(max_length=13, null=True, blank=True)
 
     email = models.EmailField()
 
     #22-06-28 13:44
-    date_added = models.DateTimeField()
+    date_added = models.DateField()
 
     #Notes in a text form
     
@@ -95,14 +97,13 @@ class clients(models.Model):
     cleaner_allocated = models.ForeignKey(cleaners, on_delete=models.PROTECT)
     
     # An ex-cleaner, 
-    ex_cleaners = models.CharField(max_length=20)
+    ex_cleaners = models.CharField(max_length=20, default="None", blank=True)
     
     #Surname of the client, reference to see the payments, text field
     payment_reference = models.CharField(max_length=40)
     
     #Email address, make history of each converstation or letters
-    
-    email_to_client = models.ForeignKey('sent_emails', on_delete=models.PROTECT)
+    #email_to_client = models.ForeignKey('sent_emails', on_delete=models.PROTECT, blank=True)
     
     
     #sms_to_client = models.CharField(max_length=1)
@@ -110,15 +111,7 @@ class clients(models.Model):
     def __str__(self):
         return self.name
         
- #Three Line and A Zip code at the end
-class zipCode(models.Model):
-    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-    zip_code = models.CharField(max_length=5, blank=True, default='0')
-    def __str__(self):
-        return self.zip_code
-
-
-#Notes in a text form
+ #Notes in a text form
 # tba to be allocated, int interviewing cleaner, ncp cleaner accepted, dc dead client
 class status(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
@@ -138,9 +131,11 @@ class email_templates(models.Model):
     def __str__(self):
         return self.template_name
 
+
+
 class sent_emails(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     email_subject = models.CharField(max_length=50)
-    email_body = RichTextField(blank = True, null=True)
+    email_body = RichTextField(blank = True, default="None")
     def __str__(self):
         return self.email_subject

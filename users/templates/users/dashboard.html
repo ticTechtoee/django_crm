@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="container py-5">
+  <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Client's Name</th>
+            
+            <th scope="col">Email</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+            {% for data in users_info %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ data.first_name }}  {{ data.last_name }}</td>
+            <td>{{ data.contact_number }}</td>
+            <td>{{ data.email }}</td>
+          </tr>
+         {% endfor %}
+        </tbody>
+      </table>
+      
+</div>
+{% endblock content %}

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'clients.apps.ClientsConfig',
     'cleaners.apps.CleanersConfig',
     'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -152,3 +153,15 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 EMAIL_HOST_PASSWORD = ";KSPjmb)hq8V"
+
+#ckeditor settings
+CKEDITOR_UPLOAD_PATH = "file_upload/"
+
+
+# config ckeditor
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar':'full',
+        'extraPlugins': 'templates',
+    },
+}

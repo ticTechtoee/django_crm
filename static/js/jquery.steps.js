@@ -1804,7 +1804,7 @@ var defaults = $.fn.steps.defaults = {
      * @default true
      * @for defaults
      **/
-    enableFinishButton: true,
+    enableFinishButton: false,
 
     /**
      * Not yet implemented.

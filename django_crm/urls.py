@@ -11,6 +11,7 @@ urlpatterns = [
     path('', include('users.urls')),
     path('create_clients/', include('clients.urls')),
     path('create_cleaners/', include('cleaners.urls')),
+    path('ckeditor/',include('ckeditor_uploader.urls')),
    
 
 ]

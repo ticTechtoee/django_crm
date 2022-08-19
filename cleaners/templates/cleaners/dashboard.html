@@ -19,6 +19,17 @@
 
 
 <div class="container py-5">
+  <form action="" method="post">
+    {% csrf_token %}
+  <div class="col-md-12">
+  <input name="search" type="text" class="form-control" placeholder="Search"><button name="srchByName" type="submit" class="btn btn-primary">Search By Name</button>
+  <button name="srchByEmail" type="submit" class="btn btn-primary">By Email</button>
+  <button name="srchByZip" type="submit" class="btn btn-primary">By Zip Code</button>
+  <button name="srchByPD" type="submit" class="btn btn-primary">By Preferred Day</button>
+  <button name="srchByType" type="submit" class="btn btn-primary">By Type</button>
+  <button name="srchByDateAdded" type="submit" class="btn btn-primary">By Date Added</button></div>
+  </form>  
+
     <table class="table">
         <thead class="thead-dark">
           <tr>
@@ -35,27 +46,9 @@
           <tr>
             <th scope="row">{{ forloop.counter }}</th>
             <td>{{ data.name }}</td>
-            <td>{{ data.email }}</td>
+            <td><a href="{% url 'cleaners:send-email' data.id %}">{{ data.email }}</a></td>
             <td>{{ data.zip_code }}</td>
-            {% if data.valid_cleaner == '1' %}
-            <td>
-              
-              <p>Verified</p>
-
-            </td>
-            {% elif data.valid_cleaner == '2' %}
-            <td>
-              
-              <p>Declined</p>
-
-            </td>
-            {% else %}
-            <td>
-              
-              <p>Pending</p>
-
-            </td>
-            {% endif %}
+            <td><a href="{% url 'cleaners:update_status' data.id %}">{{ data.status }}</a></td>
             <td><p><a href="#">View</a> <a href="#">Print</a></p></td>
           </tr>
          {% endfor %}

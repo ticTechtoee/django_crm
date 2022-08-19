@@ -2,7 +2,7 @@ from pyexpat import model
 from django.forms import ModelForm
 from django import forms
 
-from .models import clients, zipCode, status, email_templates, sent_emails
+from .models import clients, status, email_templates, sent_emails
 
 
 
@@ -10,7 +10,7 @@ class clientsForm(ModelForm):
 
     class Meta:
         model = clients
-        fields = '__all__'
+        
         widgets = {
                 'name': forms.TextInput(attrs={'placeholder': 'Full Name'}),
                 'address_line_1': forms.TextInput(attrs={'placeholder': 'Address Line 1'}),
@@ -20,23 +20,20 @@ class clientsForm(ModelForm):
                 'landline_number': forms.TextInput(attrs={'placeholder': 'Telephone Number'}),
                 'mobile_number': forms.TextInput(attrs={'placeholder': 'Mobile Number'}),
                 'email': forms.EmailInput(attrs={'placeholder': 'abc@gmail.com'}),
-                'date_added': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+                'date_added': forms.DateInput(format=('%Y-%m-%d'),attrs={'type': 'date'}),
                 'number_of_hours': forms.NumberInput(attrs={'placeholder':'Number of Hours'}),
                 'payment_reference': forms.TextInput(attrs={'placeholder':'Surname'}),
                
 
         }
+        exclude = ['cleaner_allocated']
 
     def __init__(self, *args, **kwargs):
         super(clientsForm, self).__init__(*args, **kwargs)
        
         for name, field in self.fields.items():
             field.widget.attrs.update({'class':'form-control'})
-    
-class zipCodeForm(ModelForm):
-    class Meta:
-        model = zipCode
-        fields = '__all__'
+
 
 class statusForm(ModelForm):
     class Meta:

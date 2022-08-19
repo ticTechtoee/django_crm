@@ -1,6 +1,6 @@
 from django.db import models
 import uuid
-
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -15,6 +15,7 @@ class cleaners(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
     name = models.CharField(max_length=50)
+    profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
     address_line1 = models.CharField(max_length=30)
     address_line2 = models.CharField(max_length=30)
     address_line3 = models.CharField(max_length=30)
@@ -109,3 +110,10 @@ class status(models.Model):
     full_form = models.CharField(max_length=30, default='to be allocated')
     def __str__(self):
         return self.abber_of_notes
+
+class sent_emails(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    email_subject = models.CharField(max_length=50)
+    email_body = RichTextField(blank = True, default="None")
+    def __str__(self):
+        return self.email_subject

@@ -6,7 +6,6 @@ app_name = 'clients'
 
 urlpatterns = [
     path('', views.create_clients, name='create_clients'),    
-    path('create_zip_code', views.create_zip_code, name='create_zip_code'),
     path('create_status', views.create_status, name='create_status'),
     path('dashboard', views.clients_dashboard, name='dashboard'),
     path('show_client/<str:pk>', views.show_client, name='show_client'),
@@ -15,3 +14,10 @@ urlpatterns = [
     path('create_pdf/<str:pk>', views.create_pdf, name='create_pdf'),
 
 ]
+
+
+htmx_urlpatterns = [
+    path("search_zip", views.show_cleaner_to_client, name="search_zip")
+]
+
+urlpatterns += htmx_urlpatterns

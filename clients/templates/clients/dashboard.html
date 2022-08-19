@@ -21,12 +21,13 @@
 <div class="container py-5">
   <form action="" method="post">
     {% csrf_token %}
-    <div class="col-sm-12">
+    <div class="col-md-12">
   <input name="search" type="text" class="form-control" placeholder="Search"><button name="srchByName" type="submit" class="btn btn-primary">Search By Name</button>
-  <button name="srchByEmail" type="submit" class="btn btn-primary">Search By Email</button>
-  <button name="srchByZip" type="submit" class="btn btn-primary">Search By Zip Code</button>
-  <button name="srchByPD" type="submit" class="btn btn-primary">Search By Preferred Day</button>
-  <button name="srchByType" type="submit" class="btn btn-primary">Search By Type</button></div>
+  <button name="srchByEmail" type="submit" class="btn btn-primary">By Email</button>
+  <button name="srchByZip" type="submit" class="btn btn-primary">By Zip Code</button>
+  <button name="srchByPD" type="submit" class="btn btn-primary">By Preferred Day</button>
+  <button name="srchByType" type="submit" class="btn btn-primary">By Type</button>
+  <button name="srchByDateAdded" type="submit" class="btn btn-primary">By Date Added</button></div>
   </form>  
   <table class="table">
         <thead class="thead-dark">
