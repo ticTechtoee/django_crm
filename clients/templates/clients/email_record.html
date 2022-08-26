@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container py-5">
+<div class="list-group">
+    <h3>Emails Sent to: {{email_add}}</h3>
+    {% for data in all_emails %}
+    <a href="{% url 'clients:email_details' data.id %}" class="list-group-item list-group-item-action">
+        {{data.email_subject}}
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}

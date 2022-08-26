@@ -1,9 +1,9 @@
 <div id="list">
-    <label for="">Cleaners Avialable:</label>
-<select class="form-control" name="list_of_cleaners">
-    
-    {% for data in cleaners_list %}
-    <option value="{{ data.id }}">{{ data.email }}</option>
-    {% endfor %}
-</select>
+    Cleaners Avialable
+    <select class="form-control" name="list_of_cleaners">
+
+        {% for data in cleaners_list %}
+        <option value="{{ data.id }}">{{ data.email }}</option>
+        {% endfor %}
+    </select>
 </div>

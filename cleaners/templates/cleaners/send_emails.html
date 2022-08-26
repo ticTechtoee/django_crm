@@ -14,8 +14,8 @@
   <form action="" method="post">
     <strong>Email To:</strong><p>{{ cleaners_data.email }}</p>  
     {% csrf_token %}
-    {{formSE.media}}
-    {{formSE}}
+    {{form.media}}
+    {{form}}
     <input name="send_email" type="submit" value="Send">
   </form>
     </div>

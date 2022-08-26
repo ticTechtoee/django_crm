@@ -9,8 +9,10 @@ urlpatterns = [
     path('create_status', views.create_status, name='create_status'),
     path('dashboard', views.clients_dashboard, name='dashboard'),
     path('show_client/<str:pk>', views.show_client, name='show_client'),
-    path('get_email_template/<str:pk>', views.get_email_template, name='get_email_template'),
-    path('send_email', views.send_emails, name="send-email"),
+    path('get_email_template/<str:pk>', views.email_sending_system, name='get_email_template'),
+    path('email_record/<str:pk>', views.previous_emails, name='email_record'),
+    path('email_details/<str:pk>',views.email_details_of_a_specific_client, name='email_details'),
+
     path('create_pdf/<str:pk>', views.create_pdf, name='create_pdf'),
 
 ]

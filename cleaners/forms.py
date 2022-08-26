@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 
-from .models import cleaners, status, sent_emails
+from .models import cleaners, status, email_content
 
 
 
@@ -29,8 +29,9 @@ class statusForm(ModelForm):
 class sent_emailForm(ModelForm):
     
     class Meta:
-        model = sent_emails
+        model = email_content
         fields = '__all__'
+        exclude = ['email_add']
     def __init__(self, *args, **kwargs):
         super(sent_emailForm, self).__init__(*args, **kwargs)
        

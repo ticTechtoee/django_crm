@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container py-5">
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        {% for data in email_body %}
+      
+      <h6 class="card-subtitle mb-2 text-muted">{{data.email_subject}}</h6>
+      <p class="card-text">{{data.email_body|safe}} </p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock content %}

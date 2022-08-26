@@ -111,9 +111,15 @@ class status(models.Model):
     def __str__(self):
         return self.abber_of_notes
 
-class sent_emails(models.Model):
-    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+class Email_add(models.Model):
+    client_add = models.EmailField()
+    def __str__(self):
+       return self.client_add
+    
+
+class email_content(models.Model):
+    email_add = models.ForeignKey(Email_add, on_delete=models.CASCADE)
     email_subject = models.CharField(max_length=50)
     email_body = RichTextField(blank = True, default="None")
     def __str__(self):
-        return self.email_subject
+       return self.email_subject

@@ -2,7 +2,7 @@ from pyexpat import model
 from django.forms import ModelForm
 from django import forms
 
-from .models import clients, status, email_templates, sent_emails
+from .models import clients, status, email_content
 
 
 
@@ -40,17 +40,13 @@ class statusForm(ModelForm):
         model = status
         fields = '__all__'
 
-class email_templateForm(ModelForm):
-    
-    class Meta:
-        model = email_templates
-        fields = '__all__'
 
 class sent_emailForm(ModelForm):
     
     class Meta:
-        model = sent_emails
+        model = email_content
         fields = '__all__'
+        exclude = ['email_add']
     def __init__(self, *args, **kwargs):
         super(sent_emailForm, self).__init__(*args, **kwargs)
        

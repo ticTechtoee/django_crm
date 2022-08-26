@@ -120,22 +120,18 @@ class status(models.Model):
     def __str__(self):
         return self.abber_of_notes
 
-FORMAT_EMAIL_TEMPLATES = [
-    ('TEMP 1','Template 1'),
-    ('TEMP 2','Template 2')
-]
 
-class email_templates(models.Model):
-    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-    template_name = models.CharField(max_length=50, choices=FORMAT_EMAIL_TEMPLATES)
+
+
+class Email_add(models.Model):
+    client_add = models.EmailField()
     def __str__(self):
-        return self.template_name
+       return self.client_add
+    
 
-
-
-class sent_emails(models.Model):
-    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+class email_content(models.Model):
+    email_add = models.ForeignKey(Email_add, on_delete=models.CASCADE)
     email_subject = models.CharField(max_length=50)
     email_body = RichTextField(blank = True, default="None")
     def __str__(self):
-        return self.email_subject
+       return self.email_subject

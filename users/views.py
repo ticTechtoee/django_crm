@@ -7,17 +7,18 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from twilio.rest import Client
 from .forms import SignUpForm
+from dotenv import load_dotenv
+import os
 
-import environ
-
-env = environ.Env()
-environ.Env.read_env()
+load_dotenv()
+account_sid = os.getenv("account_sid")
+auth_token = os.getenv("auth_token")
 
 
 def create_message(staff_name, admin_name, to_number):
    
-    account_sid = env('account_sid')
-    auth_token = env('auth_token')
+    account_sid = account_sid
+    auth_token = auth_token
 
     client = Client(account_sid, auth_token)
 

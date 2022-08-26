@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import mimetypes
+from dotenv import load_dotenv
+
+load_dotenv()
+email_pass = os.getenv("email_pass")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -152,7 +156,7 @@ EMAIL_HOST = "mail.maid2clean.co.uk"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_PASSWORD = ";KSPjmb)hq8V"
+EMAIL_HOST_PASSWORD = email_pass
 
 #ckeditor settings
 CKEDITOR_UPLOAD_PATH = "file_upload/"
