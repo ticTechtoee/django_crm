@@ -12,7 +12,11 @@ class cleanersForm(ModelForm):
         fields = '__all__'
         widgets = {
             'transactions_date': forms.DateInput(format=('%Y-%m-%d'),attrs={'type': 'date'}),
-            'date_added': forms.DateInput(format=('%Y-%m-%d'),attrs={'type': 'date'}),}
+            'date_added': forms.DateInput(format=('%Y-%m-%d'),attrs={'type': 'date'}),
+            'referee_1_details':forms.Textarea(attrs={'rows':4, 'cols':4}),
+            'referee_2_details':forms.Textarea(attrs={'rows':4, 'cols':4}),}
+
+
 
     def __init__(self, *args, **kwargs):
         super(cleanersForm, self).__init__(*args, **kwargs)

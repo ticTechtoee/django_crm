@@ -154,5 +154,29 @@ def create_message(cleaners_name, staff_name, to_number):
     print(message.error_message)
     return "success"
 
+#-----------------------------------------------------------------------------------------------------------------
+def profile_template(request):
+    return render(request, 'cleaners/profile_view/template.html')
 
 # -----------------------------------------------------------------------------------------------------------------
+
+def permit_image(request):
+    if request.method == "POST":
+        answer = ""
+        if request.POST.get("permit_to_work_needed") == '1':
+            answer = "Yes"
+        else:
+            answer = "No"
+    context = {'answer': answer}
+    return render(request, 'cleaners/partials/permit_image.html', context)
+
+def pet_allergies(request):
+    if request.method == "POST":
+        answer = ""
+        if request.POST.get("pet_allergies") == '1':
+            print("yes")
+            answer = "Yes"
+        else:
+            answer = "No"
+    context = {'answer': answer}
+    return render(request, 'cleaners/partials/allergy_type.html', context)

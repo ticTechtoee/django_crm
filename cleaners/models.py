@@ -40,6 +40,9 @@ class cleaners(models.Model):
     
     permit_to_work_needed = models.CharField(max_length=3, choices=QUESTION)
     
+    #If Yes then Attach an Image
+    permit_image = models.ImageField(upload_to='permit_images/', blank=True, null = True)
+
     #digit 11
     emergency_contact_number = models.CharField(max_length=11)
     emergency_contact_name = models.CharField(max_length=11)
@@ -51,7 +54,7 @@ class cleaners(models.Model):
     Disclouser = models.CharField(max_length=3,choices=QUESTION)
 
     #National Insurance Number (9 digit number)
-    NI_Nunber = models.CharField(max_length=9)
+    NI_Number = models.CharField(max_length=9)
 
     #applying on behalf of cleaner for DBS
     consent_for_DBS = models.CharField(max_length=3,choices=QUESTION)
@@ -68,9 +71,9 @@ class cleaners(models.Model):
     has_car = models.CharField(max_length=3, choices=QUESTION)
     #id_proof
     #Name address, telnumber, relationship, company name 
-    referee_1_details = models.CharField(max_length=50)
+    referee_1_details = models.TextField()
     #Name address, telnumber, relationship, company name
-    referee_2_details = models.CharField(max_length=50)
+    referee_2_details = models.TextField()
 
     #Post Code with Area Names
     areas_worked = models.CharField(max_length=50)
@@ -85,7 +88,7 @@ class cleaners(models.Model):
     # if yes then another field with the type of allergy
     pet_allergies = models.CharField(max_length=3,choices=QUESTION)
 
-    type_of_allergy = models.CharField(max_length=12, default="None")
+    type_of_allergy = models.CharField(max_length=50, default="None")
 
     #Record of payment from the client
     #if yes then put the, amount, date of transaction
