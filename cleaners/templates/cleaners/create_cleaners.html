@@ -18,6 +18,7 @@
         <div class="col-md-12 mx-auto">
             <div  style="text-align: center; color: green; margin-bottom: 50px;">
                 <h2>Create A Cleaners Profile</h2>
+                <a href="{% url 'cleaners:dashboard' %}">Go to Cleaners Dashboard</a>
             </div>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -53,8 +54,8 @@
                         {{form.address_line3}}
                     </div>
                     <div class="col-sm-3">
-                        {{form.zip_code.label}}
-                        {{form.zip_code}}
+                        {{form.post_code.label}}
+                        {{form.post_code}}
                         
                     </div>
                     <div class="col-sm-3">
@@ -122,8 +123,8 @@
                         {{form.relationship_to_emergency_contact}}
                     </div>
                     <div class="col-sm-3">
-                        {{form.Disclouser.label}}
-                        {{form.Disclouser}}
+                        {{form.Disclosure.label}}
+                        {{form.Disclosure}}
                     </div>
                     <div class="col-sm-3">
                         {{form.NI_Number.label}}
@@ -213,6 +214,10 @@
                     <div class="col-sm-3">
                         {{form.profile_image.label}}
                         {{form.profile_image}}
+                    </div>
+                    <div class="col-sm-3">
+                        {{form.notes.label}}
+                        {{form.notes}}
                     </div>
                 </div>
 

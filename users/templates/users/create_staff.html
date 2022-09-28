@@ -19,6 +19,7 @@
         <div class="col-md-10 mx-auto">
             <div  style="text-align: center; color: green; margin-bottom: 50px;">
             <h2>Create A Staff Account</h2>
+            <a href="{% url 'password_reset' %}">Reset Password For a Staff Member</a>
         </div>
             <form method="post">
                 {% csrf_token %}

@@ -14,7 +14,9 @@ class cleanersForm(ModelForm):
             'transactions_date': forms.DateInput(format=('%Y-%m-%d'),attrs={'type': 'date'}),
             'date_added': forms.DateInput(format=('%Y-%m-%d'),attrs={'type': 'date'}),
             'referee_1_details':forms.Textarea(attrs={'rows':4, 'cols':4}),
-            'referee_2_details':forms.Textarea(attrs={'rows':4, 'cols':4}),}
+            'referee_2_details':forms.Textarea(attrs={'rows':4, 'cols':4}),
+            'notes':forms.Textarea(attrs={'rows':4, 'cols':4}),
+            }
 
 
 

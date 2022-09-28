@@ -19,6 +19,9 @@
 
 
 <div class="container py-5">
+  <div style="text-align: center; color: green; margin-bottom: 50px;">
+    <h2>Cleaner's Dashboard</h2>
+</div>
   <form action="" method="post">
     {% csrf_token %}
   <div class="col-md-12">
@@ -27,8 +30,9 @@
   <button name="srchByZip" type="submit" class="btn btn-primary">By Zip Code</button>
   <button name="srchByPD" type="submit" class="btn btn-primary">By Preferred Day</button>
   <button name="srchByType" type="submit" class="btn btn-primary">By Type</button>
-  <button name="srchByDateAdded" type="submit" class="btn btn-primary">By Date Added</button></div>
-  </form>  
+  <button name="srchByDateAdded" type="submit" class="btn btn-primary">By Date Added</button>
+  <a href="{% url 'cleaners:search_by_filter' %}">Advance Filter</a></div>
+  </form>   
 
     <table class="table">
         <thead class="thead-dark">
@@ -49,7 +53,7 @@
             <td><a href="{% url 'cleaners:send-emails' data.id %}">{{ data.email }}</a></td>
             <td>{{ data.zip_code }}</td>
             <td><a href="{% url 'cleaners:update_status' data.id %}">{{ data.status }}</a></td>
-            <td><p><a href="#">View</a> <a href="#">Print</a></p></td>
+            <td><p><a href="{% url 'cleaners:show_profile' data.id %}">View</a> <a href="#">Print</a></p></td>
           </tr>
          {% endfor %}
         </tbody>

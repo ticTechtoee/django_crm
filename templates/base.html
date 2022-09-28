@@ -25,7 +25,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <a class="navbar-brand" href="{% url 'users:welcome' %}">Maid2Clean</a>
-
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'users:create_staff' %}">Create Staff<span
+                            class="sr-only">(current)</span></a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'clients:create_clients' %}">Create Clients <span
                             class="sr-only">(current)</span></a>
@@ -39,7 +42,7 @@
                 
                 {% csrf_token %}
                         <button name="btnlogout" class="btn btn-outline-success my-2 my-sm-0"><a class="btn btn-light my-2 my-sm-0"
-                                href="{% url 'users:logut_user' %}">Logout</a></button>
+                                href="{% url 'users:logout_user' %}">Logout</a></button>
               </form>
             </div>
           </nav>

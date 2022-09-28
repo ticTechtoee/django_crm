@@ -6,7 +6,8 @@ from ckeditor.fields import RichTextField
 
 
 
-NAME_OF_DAY=[('MON', 'Monday'),
+NAME_OF_DAY=[
+('MON', 'Monday'),
 ('TUE', 'Tuesday'),
 ('WED','Wednesday'),
 ('THU', 'Thursday'),
@@ -21,21 +22,21 @@ TYPE = [
 ]
 #Weekly, monthly, fortnightly
 FREQUENCY = [
-    ('1','Weekly'),
-    ('2','Monthly'),
-    ('3','Fortnightly')
+    ('Weekly','Weekly'),
+    ('Monthly','Monthly'),
+    ('Fortnightly','Fortnightly')
 ]
 #Question
 ARE_THEY_PAYING = [
-    ('1','Yes'),
-    ('2', 'No')
+    ('Yes','Yes'),
+    ('No', 'No')
 ]
 
 #DD, Standing Order(SO), Card 
 TYPES_PAYING_METHODS = [
-    ('1', 'DD'),
-    ('2', 'Standing Order(SO)'),
-    ('3', 'Card')
+    ('DD', 'DD'),
+    ('SO', 'Standing Order(SO)'),
+    ('CA', 'Card')
 ]
 
 
@@ -52,7 +53,7 @@ class clients(models.Model):
     address_line_2 = models.CharField(max_length=30)
     address_line_3 = models.CharField(max_length=30)
     
-    zip_code = models.CharField(max_length=6)
+    post_code = models.CharField(max_length=8, default="0")
 
     
 
@@ -82,7 +83,7 @@ class clients(models.Model):
     type = models.CharField(max_length=6, choices=TYPE)
 
     #Weekly, monthly, fortnightly
-    frequency = models.CharField(max_length=10, choices=FREQUENCY)
+    frequency = models.CharField(max_length=11, choices=FREQUENCY)
 
     #digits, 1-10
     number_of_hours = models.IntegerField()
@@ -94,7 +95,7 @@ class clients(models.Model):
     paying_methods = models.CharField(max_length=13, choices=TYPES_PAYING_METHODS)
     
     # Every cleaner that is available in the postcode, existing cleaner status, available for work
-    cleaner_allocated = models.ForeignKey(cleaners, on_delete=models.PROTECT)
+    cleaner_allocated = models.ForeignKey(cleaners, on_delete=models.PROTECT, null = True, blank = True)
     
     # An ex-cleaner, 
     ex_cleaners = models.CharField(max_length=20, default="None", blank=True)
@@ -102,11 +103,10 @@ class clients(models.Model):
     #Surname of the client, reference to see the payments, text field
     payment_reference = models.CharField(max_length=40)
     
-    #Email address, make history of each converstation or letters
-    #email_to_client = models.ForeignKey('sent_emails', on_delete=models.PROTECT, blank=True)
-    
-    
+        
     #sms_to_client = models.CharField(max_length=1)
+
+    notes =  models.TextField(default = "None")
 
     def __str__(self):
         return self.name

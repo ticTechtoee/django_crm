@@ -18,14 +18,14 @@
         <div class="col-lg-4">
           <div class="card mb-4">
             <div class="card-body text-center">
-              <img src="{{profile_image}}" alt="avatar"
+              <img src="{{cleaner_info.profile_image.url}}" alt="avatar"
                 class="rounded-circle img-fluid" style="width: 150px;">
-              <h5 class="my-3">{{name}}</h5>
+              <h5 class="my-3">{{cleaner_info.name}}</h5>
               <p class="text-muted mb-1"></p>
-              <p class="text-muted mb-4">{{zip_code}}</p>
+              <p class="text-muted mb-4">{{cleaner_info.zip_code}}</p>
               <div class="d-flex justify-content-center mb-2">
-                <button type="button" class="btn btn-primary">Follow</button>
-                <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+                <button type="button" class="btn btn-primary">Approve</button>
+                <button type="button" class="btn btn-outline-primary ms-1">Decline</button>
               </div>
             </div>
           </div>
@@ -64,9 +64,9 @@
                   <p class="mb-0">Address</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">address_line1</p>
-                  <p class="text-muted mb-0">address_line2</p>
-                  <p class="text-muted mb-0">address_line3</p>
+                  <p class="text-muted mb-0">{{cleaner_info.address_line1}}</p>
+                  <p class="text-muted mb-0">{{cleaner_info.address_line2}}</p>
+                  <p class="text-muted mb-0">{{cleaner_info.address_line3}}</p>
                 </div>
               </div>
               <hr>
@@ -75,7 +75,7 @@
                   <p class="mb-0">Email</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{email}}</p>
+                  <p class="text-muted mb-0">{{cleaner_info.email}}</p>
                 </div>
               </div>
               <hr>
@@ -84,7 +84,7 @@
                   <p class="mb-0">Landline Numer</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{phone}}</p>
+                  <p class="text-muted mb-0">{{cleaner_info.landline_number}}</p>
                 </div>
               </div>
               <hr>
@@ -93,7 +93,7 @@
                   <p class="mb-0">Mobile</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{mobile_number}}</p>
+                  <p class="text-muted mb-0">{{cleaner_info.mobile_number}}</p>
                 </div>
               </div>
               <hr>
@@ -102,7 +102,7 @@
                   <p class="mb-0">Date Of Added</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{date_added}}</p>
+                  <p class="text-muted mb-0">{{cleaner_info.date_added}}</p>
                 </div>
               </div>
             </div>
@@ -114,39 +114,63 @@
                   <p class="mb-4"><span class="text-primary font-italic me-1"></span>Questionnaire
                   </p>
                   <strong><p class="mb-1" style="font-size: .77rem;">Permit to work needed</p></strong>
-                  <p class="text-muted mb-0">{{permit_to_work_needed}}</p>
-                  <strong><p class="mb-1" style="font-size: .77rem;">Permit to work needed</p></strong>
-                  <p class="text-muted mb-0">{{permit_to_work_needed}}</p>
-                  <strong><p class="mb-1" style="font-size: .77rem;">Permit to work needed</p></strong>
-                  <p class="text-muted mb-0">{{permit_to_work_needed}}</p>
-                  <strong><p class="mb-1" style="font-size: .77rem;">Permit to work needed</p></strong>
-                  <p class="text-muted mb-0">{{permit_to_work_needed}}</p>
-                  <strong><p class="mb-1" style="font-size: .77rem;">Permit to work needed</p></strong>
-                  <p class="text-muted mb-0">{{permit_to_work_needed}}</p>
-                  <strong><p class="mb-1" style="font-size: .77rem;">Permit to work needed</p></strong>
-                  <p class="text-muted mb-0">{{permit_to_work_needed}}</p>
+                  <p class="text-muted mb-0">{% if cleaner_info.permit_to_work_needed == "1" %} Yes {% else %} No {% endif %}</p>
+                  <strong><p class="mb-1" style="font-size: .77rem;">Number of Hours Wanted</p></strong>
+                  <p class="text-muted mb-0">{% if cleaner_info.number_of_hours_wanted == "1" %} Yes {% else %} No {% endif %}</p>
+                  <strong><p class="mb-1" style="font-size: .77rem;">Smoker</p></strong>
+                  <p class="text-muted mb-0">{% if cleaner_info.smoker == "1" %} Yes {% else %} No {% endif %}</p>
+                  <strong><p class="mb-1" style="font-size: .77rem;">Can iron?</p></strong>
+                  <p class="text-muted mb-0">{% if cleaner_info.can_iron == "1" %} Yes {% else %} No {% endif %}</p>
+                  <strong><p class="mb-1" style="font-size: .77rem;">Can Drive?</p></strong>
+                  <p class="text-muted mb-0">{% if cleaner_info.driver == "1" %} Yes {% else %} No {% endif %}</p>
+                  <strong><p class="mb-1" style="font-size: .77rem;">Own a Car?</p></strong>
+                  <p class="text-muted mb-0">{% if cleaner_info.has_car == "1" %} Yes {% else %} No {% endif %}</p>
+                  <strong><p class="mb-1" style="font-size: .77rem;">Previous work experience</p></strong>
+                  <p class="text-muted mb-0">{% if cleaner_info.prev_work_experience == "1" %} Yes {% else %} No {% endif %}</p>
+                  <strong><p class="mb-1" style="font-size: .77rem;">Prev convicted of offence?</p></strong>
+                  <p class="text-muted mb-0">{% if cleaner_info.prev_convicted_of_offence == "1" %} Yes {% else %} No {% endif %}</p>
+                  <strong><p class="mb-1" style="font-size: .77rem;">Pet Allergies</p></strong>
+                  <p class="text-muted mb-0">{% if cleaner_info.pet_allergies == "1" %} Yes {% else %} No {% endif %}</p>
+                  <strong><p class="mb-1" style="font-size: .77rem;">Type of Allergy</p></strong>
+                  <p class="text-muted mb-0">{{cleaner_info.type_of_allergy}}</p>
+                  <strong><p class="mb-1" style="font-size: .77rem;">Is this a Valid Cleaner</p></strong>
+                  <p class="text-muted mb-0">{% if cleaner_info.valid_cleaner == "1" %} Yes {% else %} No {% endif %}</p>
                 </div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="card mb-4 mb-md-0">
                 <div class="card-body">
-                    <p class="mb-4"><span class="text-primary font-italic me-1"></span>Questionnaire
+                    <p class="mb-4"><span class="text-primary font-italic me-1"></span>General Information
                     </p>
-                    <strong><p class="mb-1" style="font-size: .77rem;">Permit to work needed</p></strong>
-                    <p class="text-muted mb-0">{{permit_to_work_needed}}</p>
-                    <strong><p class="mb-1" style="font-size: .77rem;">Permit to work needed</p></strong>
-                    <p class="text-muted mb-0">{{permit_to_work_needed}}</p>
-                    <strong><p class="mb-1" style="font-size: .77rem;">Permit to work needed</p></strong>
-                    <p class="text-muted mb-0">{{permit_to_work_needed}}</p>
-                    <strong><p class="mb-1" style="font-size: .77rem;">Permit to work needed</p></strong>
-                    <p class="text-muted mb-0">{{permit_to_work_needed}}</p>
-                    <strong><p class="mb-1" style="font-size: .77rem;">Permit to work needed</p></strong>
-                    <p class="text-muted mb-0">{{permit_to_work_needed}}</p>
-                    <strong><p class="mb-1" style="font-size: .77rem;">Permit to work needed</p></strong>
-                    <p class="text-muted mb-0">{{permit_to_work_needed}}</p>
+                    <strong><p class="mb-1" style="font-size: .77rem;">Nationality</p></strong>
+                    <p class="text-muted mb-0">{{cleaner_info.nationality}}</p>
+                    <strong><p class="mb-1" style="font-size: .77rem;">Emergency Contact Number</p></strong>
+                    <p class="text-muted mb-0">{{cleaner_info.emergency_contact_number}}</p>
+                    <strong><p class="mb-1" style="font-size: .77rem;">Emergency Contact Name</p></strong>
+                    <p class="text-muted mb-0">{{cleaner_info.emergency_contact_name}}</p>
+                    <strong><p class="mb-1" style="font-size: .77rem;">Relationship to the Emergency Contact</p></strong>
+                    <p class="text-muted mb-0">{{cleaner_info.relationship_to_emergency_contact}}</p>
+                    <strong><p class="mb-1" style="font-size: .77rem;">Disclosure</p></strong>
+                    <p class="text-muted mb-0">{{cleaner_info.Disclosure}}</p>
+                    <strong><p class="mb-1" style="font-size: .77rem;">National Insurace Number</p></strong>
+                    <p class="text-muted mb-0">{{cleaner_info.NI_Number}}</p>
+                    <strong><p class="mb-1" style="font-size: .77rem;">Consent for DBS</p></strong>
+                    <p class="text-muted mb-0">{{cleaner_info.consent_for_DBS}}</p>
                   </div>
+
+                  <div class="card-body">
+                    <p class="mb-4"><span class="text-primary font-italic me-1"></span>Other Information
+                    </p>
+                    <strong><p class="mb-1" style="font-size: .77rem;">Notes</p></strong>
+                    <p class="text-muted mb-0">{{cleaner_info.nationality}}</p>
+                    
+                  </div>
+               
+                  </div>
+                  
               </div>
+              
             </div>
           </div>
         </div>

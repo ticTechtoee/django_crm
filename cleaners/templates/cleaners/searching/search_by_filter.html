@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container py-5">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <input name="search_by_email" type="text" class="form-control" placeholder="Search By Email">
+
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <label for="fromDate">From</label>
+                <input type="date" name="fromDate" class="form-control" placeholder="From">
+            </div>
+            <div class="col-sm-3">
+                <label for="toDate">To</label>
+                <input type="date" name="toDate" class="form-control" placeholder="To">
+
+            </div>
+            <div class="col-sm-3">
+                <label for="status">Status</label>
+                <input type="text" name="status" class="form-control"  placeholder="Type Status">
+            </div>
+
+            <div class="col-sm-3">
+               <label for="permit_to_work_needed">Permit to Work needed</label>
+                <select name="permit_to_work_needed" class="form-control" id="id_permit_to_work_needed">
+                    <option value selected>Select the Answer</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+        <div class="col-sm-3">
+            <label for="is_smoker">Smoker Field</label>
+            <select name="is_smoker" class="form-control" id="id_is_smoker">
+                <option value selected>Select the Answer</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+            </select>
+        </div>
+
+        <div class="col-sm-3">
+            <label for="can_iron">Iron Field</label>
+            <select name="can_iron" class="form-control" id="id_can_iron">
+                <option value selected>Select the Answer</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+            </select>
+        </div>
+
+        <div class="col-sm-3">
+            <label for="is_driver">Driver Field</label>
+            <select name="is_driver" class="form-control" id="id_is_driver">
+                <option value selected>Select the Answer</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+            </select>
+        </div>
+
+        <div class="col-sm-3">
+            <label for="has_car">Car Field</label>
+            <select name="has_car" class="form-control" id="id_has_smoker">
+                <option value selected>Select the Answer</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+            </select>
+        </div>
+
+        </div>
+
+
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <label for="Post_code">Post Code</label>
+                <input type="text" name="Post_code" class="form-control" placeholder="Post Code" maxlength="8">
+            </div>
+            <div class="col-sm-3">
+                <label for="areas_worked">Areas worked</label>
+                <input type="text" name="areas_worked" class="form-control" placeholder="Type Area">
+
+            </div>
+            <div class="col-sm-3">
+                <label for="prev_convicted_of_offence">Convict of any offence</label>
+                <select name="prev_convicted_of_offence" class="form-control" id="id_prev_convicted_of_offence">
+                    <option value selected>Select Answer</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                   
+                </select>
+            </div>
+
+            <div class="col-sm-3">
+                <label for="number_of_hours">Number Of Hours</label>
+                <input type="number" name="number_of_hours" class="form-control" placeholder="(1,4,3)">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <label for="pet_allergies">Pet Allergies</label>
+                <select name="pet_allergies" class="form-control" id="id_pet_allergies">
+                    <option value selected>Select Answer</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                   
+                </select>
+            </div>
+            
+        </div>
+
+        <button name="search" type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+{% endblock content %}

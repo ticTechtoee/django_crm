@@ -8,6 +8,15 @@ from twilio.rest import Client
 from .forms import cleanersForm, statusForm, sent_emailForm, updateStatusForm
 from dotenv import load_dotenv
 import os
+from django.db.models import Q
+from django.http import HttpResponse
+
+from django.template.loader import get_template
+
+from django.conf import settings
+
+import xlwt
+import datetime
 
 # to get the token from .env files
 load_dotenv()
@@ -64,7 +73,103 @@ def cleaners_dashboard(request):
         get_cleaner = cleaners.objects.filter(date_added=request.POST.get("search"))
     context = {"cleaner_info": get_cleaner}
     return render(request, "cleaners/dashboard.html", context)
+#-----------------------------------------------------------------------------------------------------------------------------------
 
+def is_valid_query_param(param):
+    return param !='' and param is not None
+
+def search_by_filter(request):
+    query = cleaners.objects.all()
+    if request.method == 'POST':
+        c_email = request.POST.get('search_by_email')
+        c_status = request.POST.get('status')
+        c_permit_to_work_needed = request.POST.get('permit_to_work_needed')
+        c_smoker = request.POST.get('is_smoker')
+        c_iron = request.POST.get('can_iron')
+        c_drive = request.POST.get('is_driver')
+        c_car = request.POST.get('has_car')
+        c_post_code = request.POST.get('Post_code')
+        c_areas_worked = request.POST.get('areas_worked')
+        c_convict_of_offence = request.POST.get('prev_convicted_of_offence')
+        c_number_of_hours = request.POST.get('number_of_hours')
+        c_pet_allergies = request.POST.get('pet_allergies')
+
+        min_date = request.POST.get("fromDate")
+        max_date = request.POST.get("toDate")
+
+        if is_valid_query_param(c_email):
+            query = query.filter(Q(email = c_email)).values_list("name","post_code","mobile_number","date_added","status__abber_of_notes","number_of_hours_wanted","nationality","permit_to_work_needed","NI_Number","consent_for_DBS","smoker","can_iron","driver","has_car","areas_worked","prev_work_experience","prev_convicted_of_offence","pet_allergies","type_of_allergy")
+            
+        if is_valid_query_param(c_status):
+            query = query.filter(Q(status__abber_of_notes=c_status)).values_list("name","post_code","mobile_number","date_added","status__abber_of_notes","number_of_hours_wanted","nationality","permit_to_work_needed","NI_Number","consent_for_DBS","smoker","can_iron","driver","has_car","areas_worked","prev_work_experience","prev_convicted_of_offence","pet_allergies","type_of_allergy")
+        
+        if is_valid_query_param(c_permit_to_work_needed):
+            query = query.filter(Q(permit_to_work_needed=c_permit_to_work_needed)).values_list("name","post_code","mobile_number","date_added","status__abber_of_notes","number_of_hours_wanted","nationality","permit_to_work_needed","NI_Number","consent_for_DBS","smoker","can_iron","driver","has_car","areas_worked","prev_work_experience","prev_convicted_of_offence","pet_allergies","type_of_allergy")
+        
+        if is_valid_query_param(c_smoker):
+            query = query.filter(Q(smoker=c_smoker)).values_list("name","post_code","mobile_number","date_added","status__abber_of_notes","number_of_hours_wanted","nationality","permit_to_work_needed","NI_Number","consent_for_DBS","smoker","can_iron","driver","has_car","areas_worked","prev_work_experience","prev_convicted_of_offence","pet_allergies","type_of_allergy")
+        
+        if is_valid_query_param(c_iron):
+            query = query.filter(Q(can_iron=c_iron)).values_list("name","post_code","mobile_number","date_added","status__abber_of_notes","number_of_hours_wanted","nationality","permit_to_work_needed","NI_Number","consent_for_DBS","smoker","can_iron","driver","has_car","areas_worked","prev_work_experience","prev_convicted_of_offence","pet_allergies","type_of_allergy")
+                        
+        if is_valid_query_param(c_drive):
+            query = query.filter(Q(driver=c_drive)).values_list("name","post_code","mobile_number","date_added","status__abber_of_notes","number_of_hours_wanted","nationality","permit_to_work_needed","NI_Number","consent_for_DBS","smoker","can_iron","driver","has_car","areas_worked","prev_work_experience","prev_convicted_of_offence","pet_allergies","type_of_allergy")
+        
+        if is_valid_query_param(c_car):
+            query = query.filter(Q(has_car=c_car)).values_list("name","post_code","mobile_number","date_added","status__abber_of_notes","number_of_hours_wanted","nationality","permit_to_work_needed","NI_Number","consent_for_DBS","smoker","can_iron","driver","has_car","areas_worked","prev_work_experience","prev_convicted_of_offence","pet_allergies","type_of_allergy")
+    
+        if is_valid_query_param(c_post_code):
+            query = query.filter(Q(post_code=c_post_code)).values_list("name","post_code","mobile_number","date_added","status__abber_of_notes","number_of_hours_wanted","nationality","permit_to_work_needed","NI_Number","consent_for_DBS","smoker","can_iron","driver","has_car","areas_worked","prev_work_experience","prev_convicted_of_offence","pet_allergies","type_of_allergy")
+        
+        if is_valid_query_param(c_areas_worked):
+            query = query.filter(Q(areas_worked=c_areas_worked)).values_list("name","post_code","mobile_number","date_added","status__abber_of_notes","number_of_hours_wanted","nationality","permit_to_work_needed","NI_Number","consent_for_DBS","smoker","can_iron","driver","has_car","areas_worked","prev_work_experience","prev_convicted_of_offence","pet_allergies","type_of_allergy")
+        
+        if is_valid_query_param(c_convict_of_offence):
+            query = query.filter(Q(prev_convicted_of_offence=c_convict_of_offence)).values_list("name","post_code","mobile_number","date_added","status__abber_of_notes","number_of_hours_wanted","nationality","permit_to_work_needed","NI_Number","consent_for_DBS","smoker","can_iron","driver","has_car","areas_worked","prev_work_experience","prev_convicted_of_offence","pet_allergies","type_of_allergy")
+                        
+        if is_valid_query_param(c_number_of_hours):
+            query = query.filter(Q(number_of_hours_wanted=c_number_of_hours)).values_list("name","post_code","mobile_number","date_added","status__abber_of_notes","number_of_hours_wanted","nationality","permit_to_work_needed","NI_Number","consent_for_DBS","smoker","can_iron","driver","has_car","areas_worked","prev_work_experience","prev_convicted_of_offence","pet_allergies","type_of_allergy")
+        
+        if is_valid_query_param(c_pet_allergies):
+            query = query.filter(Q(pet_allergies=c_pet_allergies)).values_list("name","post_code","mobile_number","date_added","status__abber_of_notes","number_of_hours_wanted","nationality","permit_to_work_needed","NI_Number","consent_for_DBS","smoker","can_iron","driver","has_car","areas_worked","prev_work_experience","prev_convicted_of_offence","pet_allergies","type_of_allergy")
+
+        if is_valid_query_param(min_date):
+            query = query.filter(date_added__gte = min_date).values_list("name","post_code","mobile_number","date_added","status__abber_of_notes","number_of_hours_wanted","nationality","permit_to_work_needed","NI_Number","consent_for_DBS","smoker","can_iron","driver","has_car","areas_worked","prev_work_experience","prev_convicted_of_offence","pet_allergies","type_of_allergy")
+
+        if is_valid_query_param(max_date):
+            query = query.filter(date_added__lt = max_date).values_list("name","post_code","mobile_number","date_added","status__abber_of_notes","number_of_hours_wanted","nationality","permit_to_work_needed","NI_Number","consent_for_DBS","smoker","can_iron","driver","has_car","areas_worked","prev_work_experience","prev_convicted_of_offence","pet_allergies","type_of_allergy")
+
+        response = HttpResponse(content_type='application/ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="cleaners_report"'+ str(datetime.datetime.now())+'.xls'
+        
+        wb = xlwt.Workbook(encoding='utf-8')
+        ws = wb.add_sheet('Filtered_data')
+        row_num = 0
+        font_style = xlwt.XFStyle()
+        font_style.font.bold = True
+
+        columns = ["Name","Post code","Mobile number","Date added","Status","Req Hours", "Nationality","Permit Needed?","NIN","DBS","Smoker","Iron","Driver","Car","Areas","Work exp","Convicted","Allergies", "Type of Allergy"]
+
+        for col_num in range(len(columns)):
+            ws.write(row_num, col_num, columns[col_num], font_style)
+        
+        font_style = xlwt.XFStyle()
+        
+        for row in query:
+            row_num += 1
+        
+            for col_num in range(len(row)):
+                ws.write(row_num, col_num, str(row[col_num]), font_style)
+        
+        wb.save(response)
+
+        return response
+
+
+    return render(request, "cleaners/searching/search_by_filter.html")
+
+
+#-----------------------------------------------------------------------------------------------------------------------------------
 
 @login_required(login_url="/login_form/")
 def create_status(request):
@@ -155,8 +260,10 @@ def create_message(cleaners_name, staff_name, to_number):
     return "success"
 
 #-----------------------------------------------------------------------------------------------------------------
-def profile_template(request):
-    return render(request, 'cleaners/profile_view/template.html')
+def profile_template(request, pk):
+    get_cleaner = cleaners.objects.get(id=pk)
+    context = {"cleaner_info": get_cleaner}
+    return render(request, 'cleaners/profile_view/template.html', context)
 
 # -----------------------------------------------------------------------------------------------------------------
 

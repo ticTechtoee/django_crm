@@ -20,9 +20,10 @@ class clientsForm(ModelForm):
                 'landline_number': forms.TextInput(attrs={'placeholder': 'Telephone Number'}),
                 'mobile_number': forms.TextInput(attrs={'placeholder': 'Mobile Number'}),
                 'email': forms.EmailInput(attrs={'placeholder': 'abc@gmail.com'}),
-                'date_added': forms.DateInput(format=('%Y-%m-%d'),attrs={'type': 'date'}),
+                'date_added': forms.DateInput(attrs={'type': 'date'}),
                 'number_of_hours': forms.NumberInput(attrs={'placeholder':'Number of Hours'}),
                 'payment_reference': forms.TextInput(attrs={'placeholder':'Surname'}),
+                'notes':forms.Textarea(attrs={'rows':4, 'cols':4}),
                
 
         }

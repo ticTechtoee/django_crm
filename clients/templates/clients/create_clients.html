@@ -22,7 +22,7 @@
     <div class="row">
         <div class="col-md-10 mx-auto">
             <div style="text-align: center; color: green; margin-bottom: 50px;">
-                <h2>Create A Client Profile</h2>
+                <h2>Create A Client Profile</h2><a href="{% url 'clients:dashboard' %}">Go to dashboard</a>
             </div>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -115,33 +115,51 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-3">
-                        {{form.zip_code.label}}
+                        {{form.post_code.label}}
 
-                        <input type="text" name="zip_code" class="form-control" maxlength="7"
+                        <input type="text" name="post_code" class="form-control" maxlength="8"
                             hx-post="{% url 'clients:search_zip' %}" hx-target='#list'
                             hx-trigger="keyup changed delay:500ms">
                     </div>
-                
-                <div class="col-sm-3">
-                    <div id="list">
-                        
-                        Cleaners Available
-                        <select class="form-control" name="list_of_cleaners">
 
-                            {% for data in cleaners_list %}
-                            <option value="{{ data.id }}">{{ data.email }}</option>
-                            {% endfor %}
-                        </select>
+                    <div class="col-sm-3">
+                        <div id="list">
+
+                            Cleaners Available
+                            <select class="form-control" name="list_of_cleaners">
+
+                                {% for data in cleaners_list %}
+                                <option value="{{ data.id }}">{{ data.email }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+
+                        {{ form.notes.label }}
+                        {{ form.notes }}
+
+
+                    </div>
+                    <div class="col-sm-3">
+                       <div><label>Save</label>
+                        <button name="btnsave" type="submit"
+                            class="btn btn-success px-4 float-left form-control">Save</button></div> 
+
+                        
+                        
+
                     </div>
                 </div>
-            </div>
-                <button name="btnsave" type="submit" class="btn btn-success px-4 float-right">Save</button>
+
 
 
 
 
 
             </form>
+
         </div>
     </div>
 </div>
