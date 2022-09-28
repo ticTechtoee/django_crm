@@ -270,7 +270,7 @@ def profile_template(request, pk):
 def permit_image(request):
     if request.method == "POST":
         answer = ""
-        if request.POST.get("permit_to_work_needed") == '1':
+        if request.POST.get("permit_to_work_needed") == 'Yes':
             answer = "Yes"
         else:
             answer = "No"
@@ -280,8 +280,7 @@ def permit_image(request):
 def pet_allergies(request):
     if request.method == "POST":
         answer = ""
-        if request.POST.get("pet_allergies") == '1':
-            print("yes")
+        if request.POST.get("pet_allergies") == 'Yes':
             answer = "Yes"
         else:
             answer = "No"

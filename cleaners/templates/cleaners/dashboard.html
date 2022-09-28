@@ -51,7 +51,7 @@
             <th scope="row">{{ forloop.counter }}</th>
             <td>{{ data.name }}</td>
             <td><a href="{% url 'cleaners:send-emails' data.id %}">{{ data.email }}</a></td>
-            <td>{{ data.zip_code }}</td>
+            <td>{{ data.post_code }}</td>
             <td><a href="{% url 'cleaners:update_status' data.id %}">{{ data.status }}</a></td>
             <td><p><a href="{% url 'cleaners:show_profile' data.id %}">View</a> <a href="#">Print</a></p></td>
           </tr>
