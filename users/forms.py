@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-# from .models import clients, cleaners
+
 
 class SignUpForm(UserCreationForm):
     
@@ -18,13 +18,3 @@ class SignUpForm(UserCreationForm):
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control','placeholder': 'johndoe1'}),
         }
-
-# class clientsForm(ModelForm):
-#     class Meta:
-#         model = clients
-#         fields = '__all__'
-
-# class cleanersForm(ModelForm):
-#     class Meta:
-#         model = cleaners
-#         fields = '__all__'

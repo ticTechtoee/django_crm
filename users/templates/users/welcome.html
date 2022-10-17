@@ -30,9 +30,11 @@
                     </button></a>
                 {% endif %}
                 {% else %}
+                <div style="display: flex; align-items: center">
                 <a href="{% url 'users:login_form' %}"><button class="wel-button">
                         <i class="fas fa-sign-in"></i>Login Here
-                    </button></a>
+                    </button></a><p style="margin-left: 20px;">or</p><a style="margin-left: 20px;" href="">Inquire</a>
+                </div>
                 {% endif %}
             </div>
 
