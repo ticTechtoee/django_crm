@@ -72,7 +72,7 @@ def create_staff(request):
     return render(request, 'users/create_staff.html', {'form': form, 'title':title_of_page})
 
 
-
+@login_required(login_url='/login_form/')
 def dashboard(request):
     get_users = User.objects.all()
     context = {'users_info': get_users}

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load static %}
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
@@ -17,20 +18,20 @@
         <div class="col-md-10 mx-auto">
             <form action="" method="post">
                 {% csrf_token %}
-                {% for data in form %}
+               
                 <div class="form-group row">
-
+ {% for data in form %}
                     <div class="col-sm-6">
                         {{data.label}}
                         {{data}}
 
                     </div>
-
+   {% endfor %}
                 </div>
-                {% endfor %}
+             
                 <div class="form-group row">
 
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <button name="btnsave" type="submit" class="btn btn-success px-4 float-left form-control">Save</button>
 
                     </div>
