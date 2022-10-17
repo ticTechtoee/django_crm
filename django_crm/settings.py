@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'clients.apps.ClientsConfig',
     'cleaners.apps.CleanersConfig',
+    'inquiry.apps.InquiryConfig',
     'ckeditor',
     'ckeditor_uploader',
 ]

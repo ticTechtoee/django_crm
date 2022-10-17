@@ -1,7 +1,7 @@
 from django.db import models
 import uuid
 from ckeditor.fields import RichTextField
-
+from datetime import datetime
 # Create your models here.
 
 #Question
@@ -22,7 +22,7 @@ class cleaners(models.Model):
     post_code = models.CharField(max_length=8, default="0")
     landline_number = models.CharField(max_length=11)
     mobile_number = models.CharField(max_length=11)
-    email = models.EmailField()   
+    email = models.EmailField(unique=True, blank=False)
     date_added = models.DateField()
     #applicant(not interviwed), TBA, Full(No more work), DNU(do not use),lOA (left of owner code) 
     status = models.ForeignKey('status', on_delete = models.CASCADE)
@@ -73,7 +73,7 @@ class cleaners(models.Model):
     #if yes then put the, amount, date of transaction
     transactions_date = models.DateField()
     valid_cleaner = models.CharField(max_length=3, blank=True , choices=QUESTION)
-    notes =  models.TextField(default = "None")
+    notes =  models.TextField()
     #Same as clients
     #email_client = models.CharField(max_length=20)
    

@@ -1,43 +1,33 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     {% load static %}
-<title>Welcome</title>
-<link href="{% static 'css/welcome.css' %}" rel="stylesheet" type="text/css">
-<link rel='icon' href="{% static '/images/face-attendance-icon.png' %}">
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <title>Welcome</title>
+    <link href="{% static 'css/welcome.css' %}" rel="stylesheet" type="text/css">
+    <link rel='icon' href="{% static '/images/face-attendance-icon.png' %}">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 </head>
+
 <body>
     <img class="wave" src={% static 'images/login_form_wave_welcome.png' %}>
     <div id="container">
         <main>
-        <div class="main-content">
-        <h3 class="headline">Customer Relationship Management System</h3>
-        <p class="description">
-            We will connect you with best service in the Area.
-        </p>
-        {% if request.user.is_authenticated  %}
-            {% if request.user.is_superuser %}
-            <a href="{% url 'users:create_staff' %}"><button class="wel-button">
-                    <i class="fas fa-sign-in"></i>Login Here
-                </button></a>
-            {% else %}
-            
-            <a href="{% url 'clients:create_clients' %}"><button class="wel-button">
-                    <i class="fas fa-sign-in"></i>Login Here
-                </button></a>
-            {% endif %}
-        {% else %}
-        <a href="{% url 'users:login_form' %}"><button class="wel-button">
-                <i class="fas fa-sign-in"></i>Login Here
-            </button></a>
-        {% endif %}
-        
-        </div>
-        <div class="main-img">
-        <img class="wel-img" src={% static 'images/welcome_icon.png' %} alt="welcome">
-        </div> 
+            <div class="main-content">
+                <h3 class="headline">Customer Relationship Management System</h3>
+                <p class="description">
+                    We will connect you with best service in the Area.
+                </p>
+                <div style="display:flex;align-items:center;">
+                    <a href="{% url 'users:login_form' %}"><button class="wel-button" style="float: left;"><i class="fas fa-sign-in"></i>Login Here</button></a><p style="padding-left: 20px;padding-right: 20px">or</p><a style="float: left;" href="{% url 'inquiry:inquiry_view' %}"><strong>Send Inquiry</strong></a>
+                </div>
+
+            </div>
+            <div class="main-img">
+                <img class="wel-img" src={% static 'images/welcome_icon.png' %} alt="welcome">
+            </div>
         </main>
-        </div>
+    </div>
 </body>
+
 </html>

@@ -49,7 +49,7 @@
             {% for data in cleaner_info %}
           <tr>
             <th scope="row">{{ forloop.counter }}</th>
-            <td>{{ data.name }}</td>
+            <td><a href="{% url 'cleaners:update_cleaner' data.id %}">{{ data.name }}</a></td>
             <td><a href="{% url 'cleaners:send-emails' data.id %}">{{ data.email }}</a></td>
             <td>{{ data.post_code }}</td>
             <td><a href="{% url 'cleaners:update_status' data.id %}">{{ data.status }}</a></td>

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="alert alert-success">
+       <strong {% if message.tags %} class="{{ message.tags }}" {% endif %}> {{ message }}</strong>
+    
+    </div>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for data in form %}
+                <div class="form-group row">
+
+                    <div class="col-sm-6">
+                        {{data.label}}
+                        {{data}}
+
+                    </div>
+
+                </div>
+                {% endfor %}
+                <div class="form-group row">
+
+                    <div class="col-sm-6">
+                        <button name="btnsave" type="submit" class="btn btn-success px-4 float-left form-control">Save</button>
+
+                    </div>
+
+                </div>
+            </form>
+
+            
+        </div>
+        
+    </div>
+</div>
+{% endblock content %}

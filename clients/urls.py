@@ -1,11 +1,12 @@
-from unicodedata import name
+
 from django.urls import path, include
 from . import views
 
 app_name = 'clients'
 
 urlpatterns = [
-    path('', views.create_clients, name='create_clients'),    
+    path('', views.create_clients, name='create_clients'),
+    path('update_client/<str:pk>', views.update_client, name="update_client"),    
     path('create_status', views.create_status, name='create_status'),
     path('dashboard', views.clients_dashboard, name='dashboard'),
     path('search_by_filter', views.search_by_filter, name="search_by_filter"),

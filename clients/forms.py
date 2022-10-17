@@ -1,8 +1,9 @@
-from pyexpat import model
+
 from django.forms import ModelForm
 from django import forms
 
 from .models import clients, status, email_content
+from datetime import datetime
 
 
 
@@ -23,17 +24,20 @@ class clientsForm(ModelForm):
                 'date_added': forms.DateInput(attrs={'type': 'date'}),
                 'number_of_hours': forms.NumberInput(attrs={'placeholder':'Number of Hours'}),
                 'payment_reference': forms.TextInput(attrs={'placeholder':'Surname'}),
-                'notes':forms.Textarea(attrs={'rows':4, 'cols':4}),
+                'notes':forms.Textarea(attrs={'rows':10}),
                
 
         }
         exclude = ['cleaner_allocated']
-
+    
+    
     def __init__(self, *args, **kwargs):
         super(clientsForm, self).__init__(*args, **kwargs)
-       
+        
+        self.fields['notes'].initial = str(datetime.now().strftime(("%d.%m.%Y %H:%M:%S")))
         for name, field in self.fields.items():
             field.widget.attrs.update({'class':'form-control'})
+
 
 
 class statusForm(ModelForm):

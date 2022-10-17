@@ -2,6 +2,7 @@ from django.forms import ModelForm
 from django import forms
 
 from .models import cleaners, status, email_content
+from datetime import datetime
 
 
 
@@ -22,7 +23,7 @@ class cleanersForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(cleanersForm, self).__init__(*args, **kwargs)
-       
+        self.fields['notes'].initial = str(datetime.now().strftime(("%d.%m.%Y %H:%M:%S")))
         for name, field in self.fields.items():
             field.widget.attrs.update({'class':'form-control'})
     

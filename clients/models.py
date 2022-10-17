@@ -1,8 +1,12 @@
-
+from ast import mod
+from enum import unique
+from http import client
+from turtle import mode
 import uuid
 from django.db import models
 from cleaners.models import cleaners
 from ckeditor.fields import RichTextField
+from datetime import datetime
 
 
 
@@ -63,7 +67,7 @@ class clients(models.Model):
     landline_number = models.CharField(max_length=11, null=True, blank=True)
     mobile_number = models.CharField(max_length=13, null=True, blank=True)
 
-    email = models.EmailField()
+    email = models.EmailField(unique=True, blank=False)
 
     #22-06-28 13:44
     date_added = models.DateField()
@@ -96,9 +100,7 @@ class clients(models.Model):
     
     # Every cleaner that is available in the postcode, existing cleaner status, available for work
     cleaner_allocated = models.ForeignKey(cleaners, on_delete=models.PROTECT, null = True, blank = True)
-    
-    # An ex-cleaner, 
-    ex_cleaners = models.CharField(max_length=20, default="None", blank=True)
+       
     
     #Surname of the client, reference to see the payments, text field
     payment_reference = models.CharField(max_length=40)
@@ -106,7 +108,7 @@ class clients(models.Model):
         
     #sms_to_client = models.CharField(max_length=1)
 
-    notes =  models.TextField(default = "None")
+    notes =  models.TextField()
 
     def __str__(self):
         return self.name
@@ -135,3 +137,12 @@ class email_content(models.Model):
     email_body = RichTextField(blank = True, default="None")
     def __str__(self):
        return self.email_subject
+
+class ex_cleaner(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    client_id = models.UUIDField(default=uuid.uuid4)
+    client_email = models.EmailField()
+    cleaner =  models.ForeignKey(cleaners, on_delete = models.PROTECT, null = True, blank = True)
+
+    def __str__(self):
+        return self.cleaner.name

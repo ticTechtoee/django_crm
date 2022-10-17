@@ -134,7 +134,10 @@
                   <strong><p class="mb-1" style="font-size: .77rem;">Paying</p></strong>
                   <p class="text-muted mb-0">{{client_info.paying}}</p>
                   <strong><p class="mb-1" style="font-size: .77rem;">Ex Cleaners</p></strong>
-                  <p class="text-muted mb-0">{{client_info.ex_cleaners}}</p>
+                  {% for data in ex_cleaner %}
+                  <p class="text-muted mb-0">{{data.cleaner__name}}</p>
+                  {% endfor %}
+                  
                   <strong><p class="mb-1" style="font-size: .77rem;">Payment Reference</p></strong>
                   <p class="text-muted mb-0">{{client_info.payment_reference}}</p>
                   <strong><p class="mb-1" style="font-size: .77rem;">Notes</p></strong>

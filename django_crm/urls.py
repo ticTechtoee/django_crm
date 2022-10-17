@@ -13,7 +13,7 @@ urlpatterns = [
     path('create_clients/', include('clients.urls')),
     path('create_cleaners/', include('cleaners.urls')),
     path('ckeditor/',include('ckeditor_uploader.urls')),
-
+    path('inquiry', include('inquiry.urls')),
     path('', include('django.contrib.auth.urls')),
     path("password_reset", views.password_reset_request, name="password_reset"),
     

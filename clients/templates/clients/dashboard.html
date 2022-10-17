@@ -50,7 +50,7 @@
       {% for data in client_info %}
       <tr>
         <th scope="row">{{ forloop.counter }}</th>
-        <td>{{ data.name }}</td>
+        <td><a href="{% url 'clients:update_client' data.id %}">{{ data.name }}</a></td>
         <td><a href="{% url 'clients:get_email_template' data.id %}">{{ data.email }}</a></td>
         <td>{{ data.zip_code }}</td>
         <td>

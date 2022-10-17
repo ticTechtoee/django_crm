@@ -5,6 +5,7 @@ app_name = 'cleaners'
 
 urlpatterns = [
     path('', views.create_cleaners, name='create_cleaners'),    
+    path('update_cleaner/<str:pk>', views.update_cleaner, name='update_cleaner'),
     path('create_status', views.create_status, name='create_status'),
     path('dashboard', views.cleaners_dashboard, name='dashboard'),
     path('search_by_filter', views.search_by_filter, name="search_by_filter"),
