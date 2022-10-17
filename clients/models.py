@@ -1,7 +1,3 @@
-from ast import mod
-from enum import unique
-from http import client
-from turtle import mode
 import uuid
 from django.db import models
 from cleaners.models import cleaners
