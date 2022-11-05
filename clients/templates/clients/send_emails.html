@@ -4,7 +4,17 @@
 <div class="container py-5">
 <div class="col-sm-6">
   <form action="" method="post">
-   <strong>Email To: </strong><p>{{clients_data.email}}</p>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+<div>
+  
+</div>
+   <strong>Email To: </strong><p>{{clients_data.email}} or Check <a href="{% url 'clients:email_record' clients_data.email %}">Emails</a> Sent to this Client</p>
     {% csrf_token %}
     {{form.media}}
     {{form}}

@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from django.shortcuts import render, redirect
-from cleaners.models import cleaners, email_content, Email_add
+from cleaners.models import cleaners, EmailsSentToCleaners
+from django.contrib import messages
 from twilio.rest import Client
 from .forms import cleanersForm, statusForm, sent_emailForm, updateStatusForm
 from dotenv import load_dotenv
@@ -532,10 +533,10 @@ def email_sending_system(request, pk):
             form = sent_emailForm(request.POST)
             if form.is_valid():
                 instance = form.save(commit=False)
-                sent_to = Email_add.objects.get(client_add=get_the_data.email)
+                cleaner_info = cleaners.objects.get(email=get_the_data.email)               
                 subject = form.cleaned_data.get("email_subject")
-                email_body = form.cleaned_data.get("email_body")
-                instance.email_add = sent_to
+                email_body = form.cleaned_data.get("email_content")
+                instance.email_recipient = cleaner_info
                 instance.save()
                 from_email = settings.EMAIL_HOST_USER
                 to_email = (get_the_data.email, "")
@@ -544,7 +545,7 @@ def email_sending_system(request, pk):
                 )
                 message.content_subtype = "html"
                 message.send()
-                return redirect("cleaners:email_record", pk=get_the_data.email)
+                messages.success(request, "Email Sent!")
             else:
                 print(form.errors)
     context = {"form": form, "cleaners_data": get_the_data}
@@ -552,16 +553,19 @@ def email_sending_system(request, pk):
 
 
 def previous_emails(request, pk):
-    get_record = email_content.objects.filter(email_add__client_add=pk).values(
+    get_record = EmailsSentToCleaners.objects.filter(email_recipient__email=pk).values(
         "id", "email_subject"
     )
     context = {"all_emails": get_record, "email_add": pk}
     return render(request, "cleaners/email_record.html", context)
 
 
-def email_details_of_a_specific_client(request, pk):
-    get_record = email_content.objects.filter(id=pk).values("email_body")
+def email_details_of_a_specific_cleaner(request, pk):
+    get_record = EmailsSentToCleaners.objects.filter(id=pk).values(
+         "email_subject", "email_content"
+    )
     context = {"email_body": get_record}
+    # This template is present in the main templates forlder(for the purpose of the reusability)
     return render(request, "email_details.html", context)
 
 

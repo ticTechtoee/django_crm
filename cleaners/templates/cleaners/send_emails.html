@@ -2,23 +2,25 @@
 {% block content %}
 {% load static %}
 <div class="container py-5">
-<div class="dropdown col-sm-6">
-  <form action="" method="post">
-    {% csrf_token %}
-     
-
-  </form>
-</div>
-
-<div class="col-sm-6">
-  <form action="" method="post">
-    <strong>Email To:</strong><p>{{ cleaners_data.email }}</p>  
-    {% csrf_token %}
-    {{form.media}}
-    {{form}}
-    <input name="send_email" type="submit" value="Send">
-  </form>
-    </div>
+  <div class="col-sm-6">
+    <form action="" method="post">
+      {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      {% endif %}
+  <div>
+    
   </div>
-  {% endblock content %}
+  <strong>Email To: </strong><p>{{cleaners_data.email}} or Check <a href="{% url 'cleaners:email_record' cleaners_data.email %}">Emails</a> Sent to this Client</p>
+  {% csrf_token %}
+  {{form.media}}
+  {{form}}
+  <input name="send_email" type="submit" value="Send">
+</form>
+  </div>
+</div>
+{% endblock content %}
 

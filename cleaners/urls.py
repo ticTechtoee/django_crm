@@ -11,7 +11,7 @@ urlpatterns = [
     path('search_by_filter', views.search_by_filter, name="search_by_filter"),
     path('send_emails/<str:pk>', views.email_sending_system, name='send-emails'),
     path('email_record/<str:pk>', views.previous_emails, name='email_record'),
-    path('email_details/<str:pk>',views.email_details_of_a_specific_client, name='email_details'),
+    path('email_details/<str:pk>',views.email_details_of_a_specific_cleaner, name='email_details'),
     path('update_status/<str:pk>', views.updateStatus, name='update_status'),
 
     path('profile_template/<str:pk>', views.profile_template, name='show_profile'),

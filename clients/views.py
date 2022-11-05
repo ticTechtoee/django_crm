@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.conf import settings
-
+from django.contrib import messages
 import os
 from datetime import datetime
 
@@ -10,7 +10,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 
 from cleaners.models import cleaners
-from clients.models import clients, email_content, Email_add, ex_cleaner
+from clients.models import clients,ex_cleaner, EmailsSentToClient
 from django.db.models import Q
 
 from .forms import clientsForm, statusForm, sent_emailForm
@@ -456,11 +456,11 @@ def email_sending_system(request, pk):
             if form.is_valid():
                 instance = form.save(commit=False)
                 # Saving emails sent to a specific email address to get the list of emails sent to client
-                sent_to = Email_add.objects.get(client_add=get_the_data.email)
+                client_info = clients.objects.get(email=get_the_data.email)
 
                 subject = form.cleaned_data.get("email_subject")
-                email_body = form.cleaned_data.get("email_body")
-                instance.email_add = sent_to
+                email_body = form.cleaned_data.get("email_content")
+                instance.email_recipient = client_info
                 instance.save()
                 from_email = settings.EMAIL_HOST_USER
                 to_email = (get_the_data.email, "")
@@ -469,7 +469,8 @@ def email_sending_system(request, pk):
                 )
                 message.content_subtype = "html"
                 message.send()
-                return redirect("clients:email_record", pk=get_the_data.email)
+                messages.success(request, "Email Sent!")
+                print('Email Sent')
     context = {"form": form, "clients_data": get_the_data}
     return render(request, "clients/send_emails.html", context)
 
@@ -479,7 +480,7 @@ def email_sending_system(request, pk):
 
 @login_required(login_url="/accounts/login/")
 def previous_emails(request, pk):
-    get_record = email_content.objects.filter(email_add__client_add=pk).values(
+    get_record = EmailsSentToClient.objects.filter(email_recipient__email=pk).values(
         "id", "email_subject"
     )
     context = {"all_emails": get_record, "email_add": pk}
@@ -491,10 +492,11 @@ def previous_emails(request, pk):
 
 @login_required(login_url="/accounts/login/")
 def email_details_of_a_specific_client(request, pk):
-    get_record = email_content.objects.filter(id=pk).values(
-        "email_subject", "email_body"
+    get_record = EmailsSentToClient.objects.filter(id=pk).values(
+        "email_subject", "email_content"
     )
     context = {"email_body": get_record}
+    # This template is present in the main templates forlder(for the purpose of the reusability)
     return render(request, "email_details.html", context)
 
 

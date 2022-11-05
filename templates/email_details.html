@@ -2,14 +2,14 @@
 {% block content %}
 {% load static %}
 <div class="container py-5">
-<div class="card" style="width: 18rem;">
-    <div class="card-body">
-        {% for data in email_body %}
-      
-      <h6 class="card-subtitle mb-2 text-muted">{{data.email_subject}}</h6>
-      <p class="card-text">{{data.email_body|safe}} </p>
-      {% endfor %}
-    </div>
+  <div class="col-sm-12">
+
+    {% for data in email_body %}
+
+    <h3 style="text-decoration:underline;">Subject: {{data.email_subject}}</h3>
+    <p>{{data.email_content|safe}} </p>
+    {% endfor %}
+
   </div>
 </div>
 {% endblock content %}

@@ -107,7 +107,7 @@ class clients(models.Model):
     notes =  models.TextField()
 
     def __str__(self):
-        return self.name
+        return self.email
         
  #Notes in a text form
 # tba to be allocated, int interviewing cleaner, ncp cleaner accepted, dc dead client
@@ -119,21 +119,6 @@ class status(models.Model):
         return self.abber_of_notes
 
 
-
-
-class Email_add(models.Model):
-    client_add = models.EmailField()
-    def __str__(self):
-       return self.client_add
-    
-
-class email_content(models.Model):
-    email_add = models.ForeignKey(Email_add, on_delete=models.CASCADE)
-    email_subject = models.CharField(max_length=50)
-    email_body = RichTextField(blank = True, default="None")
-    def __str__(self):
-       return self.email_subject
-
 class ex_cleaner(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     client_id = models.UUIDField(default=uuid.uuid4)
@@ -142,3 +127,9 @@ class ex_cleaner(models.Model):
 
     def __str__(self):
         return self.cleaner.name
+
+class EmailsSentToClient(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    email_recipient = models.ForeignKey('clients', on_delete = models.PROTECT) 
+    email_subject = models.CharField(max_length = 50)
+    email_content = RichTextField(blank = True, default="None")

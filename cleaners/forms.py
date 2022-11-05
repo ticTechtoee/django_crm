@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 
-from .models import cleaners, status, email_content
+from .models import cleaners, status, EmailsSentToCleaners
 from datetime import datetime
 
 
@@ -36,9 +36,9 @@ class statusForm(ModelForm):
 class sent_emailForm(ModelForm):
     
     class Meta:
-        model = email_content
+        model = EmailsSentToCleaners
         fields = '__all__'
-        exclude = ['email_add']
+        exclude = ['email_recipient']
     def __init__(self, *args, **kwargs):
         super(sent_emailForm, self).__init__(*args, **kwargs)
        
