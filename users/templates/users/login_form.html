@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-
-
 <html lang="en">
-
 <head>
   {% load static %}
   <meta charset="UTF-8">
@@ -19,6 +16,7 @@
       <img src={% static 'images/login_side_image.png' %}>
     </div>
     <div class="login-box-content">
+      
       <form action="" method="post">
         {% csrf_token %}
         <img src={% static 'images/login_profile_icon.svg' %}>
@@ -44,7 +42,14 @@
 
 
         <input type="submit" class="login-btn" value="Login" name="btnLogin">
-
+<div class="div">
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}> {{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}</div>
       </form>
 
     </div>

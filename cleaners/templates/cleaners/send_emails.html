@@ -14,11 +14,13 @@
   <div>
     
   </div>
-  <strong>Email To: </strong><p>{{cleaners_data.email}} or Check <a href="{% url 'cleaners:email_record' cleaners_data.email %}">Emails</a> Sent to this Client</p>
+  <strong>Email To: </strong><p>{{cleaners_data.email}} or Check <a href="{% url 'cleaners:email_record' cleaners_data.email %}">Emails</a> Sent to this Cleaner</p>
   {% csrf_token %}
   {{form.media}}
   {{form}}
-  <input name="send_email" type="submit" value="Send">
+  <div>
+    <button name="send_email" type="submit"
+        class="btn btn-success px-4 float-left form-control">Send Email</button></div> 
 </form>
   </div>
 </div>

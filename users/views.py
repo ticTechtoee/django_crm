@@ -20,6 +20,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.conf import settings
 
+from django.contrib import messages
 
 
 load_dotenv()
@@ -89,7 +90,7 @@ def loginUser(request):
                 login(request, user)
                 return redirect('clients:create_clients')
         else:
-            return redirect('users:welcome')
+            messages.error(request, "Username or Password is incorrect")
     return render(request, 'users/login_form.html')
 
 def logout_user(request):

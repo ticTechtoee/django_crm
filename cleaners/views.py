@@ -34,10 +34,10 @@ def create_cleaners(request):
         if "btnsave" in request.POST:
             form = cleanersForm(request.POST, request.FILES)
             if form.is_valid():
-                email_add = Email_add.objects.create(
-                    client_add=form.cleaned_data.get("email")
-                )
-                email_add.save()
+                # email_add = Email_add.objects.create(
+                #     client_add=form.cleaned_data.get("email")
+                # )
+                # email_add.save()
                 form.save()
                 try:
                     create_message(

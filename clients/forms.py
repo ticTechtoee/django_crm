@@ -11,7 +11,7 @@ class clientsForm(ModelForm):
 
     class Meta:
         model = clients
-        
+
         widgets = {
                 'name': forms.TextInput(attrs={'placeholder': 'Full Name'}),
                 'address_line_1': forms.TextInput(attrs={'placeholder': 'Address Line 1'}),

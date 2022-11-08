@@ -18,7 +18,9 @@
     {% csrf_token %}
     {{form.media}}
     {{form}}
-    <input name="send_email" type="submit" value="Send">
+    <div>
+      <button name="send_email" type="submit"
+          class="btn btn-success px-4 float-left form-control">Send Email</button></div> 
   </form>
     </div>
   </div>

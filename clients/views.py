@@ -88,7 +88,14 @@ def create_clients(request):
 def update_client(request, pk):
     obj = clients.objects.get(id=pk)
     current_date = {"get_date": str(datetime.now().strftime(("%d.%m.%Y %H:%M:%S")))}
-    form = clientsForm(instance=obj, initial=current_date)
+
+    post_code = obj.post_code
+    cleaner_allocated = obj.cleaner_allocated.email
+
+    form = clientsForm(instance=obj)
+
+    form.fields["notes"].initial = current_date
+    form.fields["post_code"].initial = post_code
     if request.method == "POST":
         form = clientsForm(request.POST, instance=obj)
         if form.is_valid():
@@ -109,7 +116,7 @@ def update_client(request, pk):
                 instance.post_code = request.POST["post_code"]
                 instance.save()
             return redirect("clients:dashboard")
-    context = {"form": form}
+    context = {"form": form, 'post_code':post_code}
     return render(request, "clients/create_clients.html", context)
 
 
