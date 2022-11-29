@@ -157,15 +157,14 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-DEFAULT_FROM_EMAIL = 'assist@maid2clean.co.uk'
+DEFAULT_FROM_EMAIL = 'maid2cleanofficial@gmail.com'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST_USER = "assist@maid2clean.co.uk"
-EMAIL_HOST = "mail.maid2clean.co.uk"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = "maid2cleanofficial@gmail.com"
+EMAIL_HOST_PASSWORD = email_pass
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-
-EMAIL_HOST_PASSWORD = email_pass
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 #ckeditor settings
 CKEDITOR_UPLOAD_PATH = "file_upload/"
